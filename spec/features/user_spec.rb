@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'User management' do
   scenario 'create a new user' do
-    pending 'implementation of User'
+    'implementation of User'
     
     visit root_path
     click_link 'Sign Up'
