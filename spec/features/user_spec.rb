@@ -45,6 +45,7 @@ feature 'User management' do
     fill_in 'Password', with: 'password1'
     click_button 'Log In'
     click_link 'Log Out'
+    expect(page).to have_content 'You are logged out.'
     expect(page).to_not have_content 'Log Out'
     expect(page).to have_content 'Log In'
     expect(page).to have_content 'Sign Up'
