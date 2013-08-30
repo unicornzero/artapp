@@ -5,6 +5,9 @@ Artapp::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
+  get 'adminz', to: 'users#admin_page', as: 'adminz'
+
+
   resources :users
   resources :sessions
 

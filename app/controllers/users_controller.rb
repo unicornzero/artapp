@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :authorize, only: :admin_page
+
   def index
     @users = User.all
   end
@@ -19,4 +21,6 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def admin_page
+  end
 end

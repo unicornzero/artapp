@@ -6,9 +6,9 @@
   <%= link_to 'Log In', login_path %>
 <% end %>
 
-<% @users.each do |user| %>
   <p>Registered Users:</p>
   <p>
+<% @users.each do |user| %>
     <%= user.email %>
   </p>
 <% end %>
