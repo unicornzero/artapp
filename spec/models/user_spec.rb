@@ -3,54 +3,29 @@ require 'spec_helper'
 describe 'User' do
   describe 'validations' do
     it 'should pass with valid information' do
-      user = User.new(
-        email: 'user1@example.com',
-        password: 'password1',
-        password_confirmation: 'password1'
-        )
-
+      user = build(:user)
       expect(user).to be_valid
     end
 
     context 'password' do
       it 'should be present' do
-        user = User.new(
-          email: 'user1@example.com',
-          password: nil,
-          password_confirmation: nil
-          )
-
+        user = build(:user, password: nil, password_confirmation: nil)
         expect(user).not_to be_valid
       end
 
       it 'should not be too short' do
-        user = User.new(
-          email: 'user1@example.com',
-          password: 'cat',
-          password_confirmation: 'cat'
-          )
-
+        user = build(:user, password: 'cat', password_confirmation: 'cat')
         expect(user).not_to be_valid
       end
 
       its 'should not be too long' do
-        user = User.new(
-          email: 'user1@example.com',
-          password: '123456789_12345679_123456790',
-          password_confirmation: '123456789_12345679_123456790'
-          )
-
+        user = build(:user, password: '123456789_12345679_123456790', password_confirmation: '123456789_12345679_123456790')
         expect(user).not_to be_valid
       end
     end
     context 'password confirmation' do
       its 'must match' do
-        user = User.new(
-          email: 'user1@example.com',
-          password: 'password1',
-          password_confirmation: 'sssswwww1'
-          )
-        
+        user = build(:user, password: 'password1', password_confirmation: 'sssswwww1')
         expect(user).not_to be_valid
       end
     end
