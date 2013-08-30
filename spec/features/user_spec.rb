@@ -11,5 +11,7 @@ feature 'User management' do
     fill_in 'Confirm Password', with: 'password1'
     click_button 'Create Your Account'
     expect(page).to have_content 'Your account has been created.'
+    expect(page).to have_content 'user1@example.com'
+
   end
 end
