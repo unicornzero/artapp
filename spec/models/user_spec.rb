@@ -38,11 +38,11 @@ describe 'User' do
       expect(user).to_not be_valid
     end
 
-    its 'should be valid without a password' do
+    its 'should not be valid with a long password' do
       user = User.new(
         email: 'user1@example.com',
-        password: nil,
-        password_confirmation: nil
+        password: '123456789_12345679_123456790',
+        password_confirmation: '123456789_12345679_123456790'
         )
       expect(user).to_not be_valid
     end
