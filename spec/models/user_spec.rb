@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'User' do
+describe User do
   describe 'validations' do
     it 'should pass with valid information' do
       user = build(:user)
@@ -23,6 +23,7 @@ describe 'User' do
         expect(user).not_to be_valid
       end
     end
+
     context 'password confirmation' do
       its 'must match' do
         user = build(:user, password: 'password1', password_confirmation: 'sssswwww1')
@@ -30,4 +31,6 @@ describe 'User' do
       end
     end
   end
+
+
 end
