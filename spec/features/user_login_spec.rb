@@ -1,32 +1,15 @@
 require 'spec_helper'
 
 feature 'User management' do
-  scenario 'signup' do 
-    visit root_path
-    click_link 'Sign Up'
-    fill_in 'Email', with: 'user1@example.com'
-    fill_in 'Password', with: 'password1'
-    fill_in 'Confirm Password', with: 'password1'
-    click_button 'Create Your Account'
-    expect(page).to have_content 'Your account has been created.'
-    expect(page).to have_content 'user1@example.com'
-  end
-
   scenario 'signup logs user in' do
     visit root_path
+
     click_link 'Sign Up'
     fill_in 'Email', with: 'user1@example.com'
     fill_in 'Password', with: 'password1'
     fill_in 'Confirm Password', with: 'password1'
     click_button 'Create Your Account'
-=begin
-    visit root_path
-    click_link 'Log In'
-    fill_in 'Email', with: 'user1@example.com'
-    fill_in 'Password', with: 'password1'
-    click_button 'Log In'
-    expect(page).to have_content 'You are logged in.'
-=end
+
     expect(page).to have_content 'Log Out'
     expect(page).to_not have_content 'Log In'
     expect(page).to_not have_content 'Sign Up'
@@ -39,14 +22,9 @@ feature 'User management' do
     fill_in 'Password', with: 'password1'
     fill_in 'Confirm Password', with: 'password1'
     click_button 'Create Your Account'
-=begin
-    visit root_path
-    click_link 'Log In'
-    fill_in 'Email', with: 'user1@example.com'
-    fill_in 'Password', with: 'password1'
-    click_button 'Log In'
-=end
+
     click_link 'Log Out'
+
     expect(page).to have_content 'You are logged out.'
     expect(page).to_not have_content 'Log Out'
     expect(page).to have_content 'Log In'
@@ -55,6 +33,7 @@ feature 'User management' do
 
   scenario 'guest cannot visit admin page' do
     visit adminz_path
+
     expect(page).to have_content 'Not Authorized.'
     expect(current_path).to eq root_path
   end
@@ -66,7 +45,9 @@ feature 'User management' do
     fill_in 'Password', with: 'password1'
     fill_in 'Confirm Password', with: 'password1'
     click_button 'Create Your Account'
+
     visit adminz_path
+    
     expect(page).to have_content 'This is the admin page.'
     expect(current_path).to_not eq root_path
   end

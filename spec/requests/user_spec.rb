@@ -7,6 +7,7 @@ describe 'User' do
       password: 'password1',
       password_confirmation: 'password1'
       )
+    
     expect(user).to be_valid
   end
 end
