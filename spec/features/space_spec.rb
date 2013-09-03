@@ -1,7 +1,19 @@
 require 'spec_helper'
 
 feature 'Space' do
-  scenario 'guest can view' do
+  scenario 'guest can all spaces', focus: true do
+    space1 = create(:space)
+    space2 = create(:space)
+    space3 = create(:space)
+
+    visit spaces_path
+
+    expect(page).to have_content space1.name
+    expect(page).to have_content space2.name
+    expect(page).to have_content space3.name
+  end
+
+  scenario 'guest can view a space' do
     space = create(:space)
     
     visit space_path(space)

@@ -1,6 +1,6 @@
 FactoryGirl.define do 
   factory :space do
-    name 'Lawrence Street Gallery'
+    sequence(:name) {|n| "Gallery No. #{n}" }
   end
   factory :user do
     email 'user1@example.com'

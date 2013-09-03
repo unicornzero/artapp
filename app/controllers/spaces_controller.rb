@@ -1,6 +1,10 @@
 class SpacesController < ApplicationController
   before_filter :authorize, only: [:new, :create, :edit, :update]
 
+  def index
+    @spaces = Space.all
+  end
+
   def new
     @space = Space.new
   end
