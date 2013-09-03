@@ -1,0 +1,8 @@
+<h1>Edit Space: <%= @space.name %></h1>
+
+<%= form_for @space do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit 'Save Changes' %>
+<% end %>
