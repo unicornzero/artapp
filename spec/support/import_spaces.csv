@@ -1,4 +1,4 @@
-id,name
-4,Otter's Gallery
-5,Stoat's Fine Art
-17,Mustelid Emporium
+id,name,url
+4,Otter's Gallery,http://www.ottergallery.com
+5,Stoat's Fine Art,http://www.stoatsart.com
+17,Mustelid Emporium,http://www.mustyemporium.com

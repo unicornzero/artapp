@@ -1,4 +1,4 @@
-id,name
-,Hana Street Gallery
-,Deux Ex Museum
-,Tres Arts
+id,name,url
+,Hana Street Gallery,http://www.hanagallery.com
+,Deux Ex Museum,http://www.deusexmusey.com
+,Tres Arts,http://www.tresartes.com

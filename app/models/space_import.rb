@@ -39,6 +39,7 @@ class SpaceImport
         space = Space.new
       end
       space.name = row["name"]
+      space.url = row["url"]
       space.save!
       file_spaces << space
     end
