@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authorize, only: :admin_page
+  before_action :authorize, only: :admin_page
 
   def index
     @users = User.all

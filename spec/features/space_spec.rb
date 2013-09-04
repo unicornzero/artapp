@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'Space' do
-  scenario 'guest can all spaces', focus: true do
+  scenario 'guest can see all spaces' do
     space1 = create(:space)
     space2 = create(:space)
     space3 = create(:space)

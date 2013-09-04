@@ -1,0 +1,23 @@
+<h1>Spaces Import</h1>
+
+<br>
+
+<%= form_for @space_import do |f| %>
+  <% if @space_import.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@space_import.errors.count, "error") %> prohibited this import from completing:</h2>
+      <ul>
+      <% @space_import.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :file, 'Select your File:' %>
+    <%= f.file_field :file %>
+  </div>
+<br>
+  <div class="buttons"><%= f.submit "Import" %></div>
+<% end %>

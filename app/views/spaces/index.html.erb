@@ -2,9 +2,16 @@
 
 <br>
 <br>
+
 <h3>Spaces:</h3>
 <% @spaces.each do |space| %>
   <p>
   <%= link_to space.name, space_path(space) %>
   </p>
 <% end %>
+
+
+<br>
+<br>
+
+<%= link_to 'Import Spaces', new_space_import_path %>

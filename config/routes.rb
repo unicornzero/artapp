@@ -1,16 +1,16 @@
 Artapp::Application.routes.draw do
 
   root 'users#index'
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  delete 'logout', to: 'sessions#destroy', as: 'logout'
 
   get 'adminz', to: 'users#admin_page', as: 'adminz'
+  get 'login', to: 'sessions#new', as: 'login'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'signup', to: 'users#new', as: 'signup'
 
-
-  resources :users
   resources :sessions
-  resources :spaces
+  resources :spaces 
+  resources :space_imports
+  resources :users
 
 
 

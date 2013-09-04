@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Space do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    it 'should be valid with valid information' do
+      space = build(:space)
+
+      expect(space).to be_valid
+    end
+  end
 end
