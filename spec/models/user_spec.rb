@@ -15,8 +15,6 @@ describe User do
     it { should_not allow_value("@.com").for(:email) }
     it { should_not allow_value("@example.com").for(:email) }
 
-
-
     context 'password' do
       it 'should be present' do
         user = build(:user, password: nil, password_confirmation: nil)

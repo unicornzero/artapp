@@ -4,6 +4,9 @@ class Space < ActiveRecord::Base
                   length: { maximum: 50 }, 
                   uniqueness: true
 
+  has_many :albums
+  has_many :photos, through: :albums
+
 =begin
   require 'csv'
 
