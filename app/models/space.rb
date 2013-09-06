@@ -1,4 +1,10 @@
 class Space < ActiveRecord::Base
+
+  validates :name, presence:   true,
+                  length: { maximum: 50 }, 
+                  uniqueness: true
+
+=begin
   require 'csv'
 
   def self.import(file)
@@ -8,5 +14,5 @@ class Space < ActiveRecord::Base
       space.save!
     end
   end
-
+=end
 end
