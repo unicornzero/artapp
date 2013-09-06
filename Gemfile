@@ -13,7 +13,8 @@ group :test do
   gem "database_cleaner", "~> 1.0.1"
   gem "launchy", "~> 2.3.0"
   gem "faker", "~> 1.1.2"
-  #selenium-webdriver
+  #see capybara docs for headless browser js testing
+  gem "shoulda-matchers"
 end
 
 # Use sqlite3 as the database for Active Record
@@ -57,3 +58,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'carrierwave'
