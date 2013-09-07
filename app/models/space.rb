@@ -1,21 +1,16 @@
 class Space < ActiveRecord::Base
-
+  has_many :albums
+  has_many :photos, through: :albums
+  
   validates :name, presence:   true,
                   length: { maximum: 50 }, 
                   uniqueness: true
 
-  has_many :albums
-  has_many :photos, through: :albums
+  after_create :create_default_album
 
-=begin
-  require 'csv'
-
-  def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
-      space = find_by_id(row["id"]) || new
-      space.attributes = row.to_hash.slice(:name)
-      space.save!
-    end
+private
+  def create_default_album
+    self.albums.create(name: "default album")
   end
-=end
+
 end

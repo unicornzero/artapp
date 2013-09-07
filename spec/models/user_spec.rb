@@ -14,6 +14,7 @@ describe User do
     it { should_not allow_value("incomplete").for(:email) }
     it { should_not allow_value("@.com").for(:email) }
     it { should_not allow_value("@example.com").for(:email) }
+    it { should_not allow_value("a" * 100 + "@example.com").for(:email) }
 
     context 'password' do
       it 'should be present' do

@@ -26,6 +26,9 @@ class SpacesController < ApplicationController
 
   def edit
     @space = Space.find(params[:id])
+    @album = @space.albums.first
+    @new_photo = @album.photos.build
+    @photos = @album.photos
   end
 
   def update
@@ -38,5 +41,8 @@ class SpacesController < ApplicationController
       render 'edit'
     end
   end
+
+private
+
 
 end

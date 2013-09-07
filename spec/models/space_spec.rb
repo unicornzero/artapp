@@ -14,5 +14,12 @@ describe Space do
 
       expect(space).to be_valid
     end
+
+    it 'should create album when space is created' do
+      space = Space.create(name: "My Art Museum")
+      expect(space.albums.count).to eq(1)
+    end
+
+    it 'should delete associated albums when deleted'
   end
 end

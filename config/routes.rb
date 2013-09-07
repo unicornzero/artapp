@@ -11,6 +11,7 @@ Artapp::Application.routes.draw do
   resources :spaces 
   resources :space_imports
   resources :users
+  resources :photos
 
 
 
