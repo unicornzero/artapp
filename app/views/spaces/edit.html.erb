@@ -11,6 +11,22 @@
     </ul>
   </div>
 <% end %>
+<div id="add_image">
+<h3>Add an Image</h3>
+  <%= form_for @photo, multipart: true do |f| %>
+
+    <%= f.hidden_field :album_id %>
+
+    <%= f.label 'Image Name' %>
+    <%= f.text_field :name %>
+
+    <%= f.label :file %>
+    <%= f.file_field :image %>
+
+    <%= f.submit "Upload" %>
+  <% end %>
+</div>
+
 
 <br>
 
@@ -42,18 +58,3 @@
 <br>
 <br>
 
-<div id="add_image">
-<h3>Add an Image</h3>
-  <%= form_for @new_photo, multipart: true do |f| %>
-
-    <%= f.hidden_field :album_id %>
-
-    <%= f.label 'Image Name' %>
-    <%= f.text_field :name %>
-
-    <%= f.label :file %>
-    <%= f.file_field :image %>
-
-    <%= f.submit "Upload" %>
-  <% end %>
-</div>

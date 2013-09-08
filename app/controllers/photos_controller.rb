@@ -1,16 +1,16 @@
 class PhotosController < ApplicationController
 
   def create
-    photo = Photo.create(params.require(:photo).permit(:album_id, :name, :image))
-    if photo.valid?
+    @photo = Photo.create(params.require(:photo).permit(:album_id, :name, :image))
+    if @photo.valid?
       flash[:success] = 'Your image has been uploaded'
-      redirect_to edit_space_path(photo.album.space)
+      redirect_to edit_space_path(@photo.album.space)
     elsif (space = Album.where(id: params[:photo][:album_id]).first.space)
       flash[:error] = 'Error- Your image has not been saved'
       unless !params[:name].to_s.empty?
         flash[:image_name_error] = 'Image Name cannot be blank.'
       end
-      unless !photo.image.to_s.empty?
+      unless !@photo.image.to_s.empty?
         flash[:image_file_error] = 'File cannot be empty.'
       end      
       redirect_to edit_space_path(space)

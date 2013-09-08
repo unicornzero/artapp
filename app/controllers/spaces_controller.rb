@@ -27,13 +27,13 @@ class SpacesController < ApplicationController
   def edit
     @space = Space.find(params[:id])
     @photos = @space.albums.first.photos
-    @new_photo = @photos.new
+    @photo = @photos.new
   end
 
   def update
     @space = Space.find(params[:id])
     @photos = @space.albums.first.photos
-    @new_photo = @photos.new
+    @photo = @photos.new
     if @space.update_attributes(params.require(:space).permit(:name))
       flash.now[:success] = 'Your changes have been saved.'
     else
