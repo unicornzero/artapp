@@ -21,7 +21,7 @@ class SpacesController < ApplicationController
   end
 
   def show
-    @space = Space.where(id: params[:id]).first
+    @space = Space.find(params[:id])
   end
 
   def edit
@@ -32,20 +32,12 @@ class SpacesController < ApplicationController
 
   def update
     @space = Space.find(params[:id])
-    #@photos = @space.photos
-    #@photo = @photos.new
     if @space.update_attributes(params.require(:space).permit(:name))
       flash[:success] = 'Your changes have been saved.'
     else
       flash.now[:error] = 'Error- Your changes have not been saved'
-      flash.now[:sother] = "params are #{params}"
     end
     redirect_to edit_space_path(@space)
   end
-
-  def create_photo
-
-  end
-
 
 end

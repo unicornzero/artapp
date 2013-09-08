@@ -1,13 +1,13 @@
 class PhotosController < ApplicationController
 
   def new
-    @space = Space.where(id: params[:space_id]).first
+    @space = Space.find(params[:space_id])
     @photo = @space.photos.build
     @photo.space_id = params[:space_id]
   end
 
   def create
-    @space = Space.where(id: params[:space_id]).first
+    @space = Space.find(params[:space_id])
     @photo = @space.photos.build
     @photo.update_attributes(params.require(:photo).permit(:space_id, :name, :image))
     if @photo.save
@@ -15,20 +15,13 @@ class PhotosController < ApplicationController
       redirect_to edit_space_path(@photo.space)
     else
       flash[:error] = 'Error- Your image has not been saved'
-      unless !params[:name].to_s.empty?
-        flash[:image_name_error] = 'Image Name cannot be blank.'
-      end
-      unless !@photo.image.to_s.empty?
-        flash[:image_file_error] = 'File cannot be empty.'
-      end
       @photo.space_id = params[:photo][:space_id]
-
       render 'new'
     end
   end
 
   def edit
-    @photo = Photo.where(id: params[:id]).first
+    @photo = Photo.find(params[:id])
     @space = @photo.space
   end
 
