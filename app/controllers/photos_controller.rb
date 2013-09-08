@@ -1,26 +1,35 @@
 class PhotosController < ApplicationController
 
+  def new
+    @space = Space.where(id: params[:space_id]).first
+    @photo = @space.photos.build
+    @photo.space_id = params[:space_id]
+  end
+
   def create
-    @photo = Photo.create(params.require(:photo).permit(:album_id, :name, :image))
-    if @photo.valid?
+    @space = Space.where(id: params[:space_id]).first
+    @photo = @space.photos.build
+    @photo.update_attributes(params.require(:photo).permit(:space_id, :name, :image))
+    if @photo.save
       flash[:success] = 'Your image has been uploaded'
-      redirect_to edit_space_path(@photo.album.space)
-    elsif (space = Album.where(id: params[:photo][:album_id]).first.space)
+      redirect_to edit_space_path(@photo.space)
+    else
       flash[:error] = 'Error- Your image has not been saved'
       unless !params[:name].to_s.empty?
         flash[:image_name_error] = 'Image Name cannot be blank.'
       end
       unless !@photo.image.to_s.empty?
         flash[:image_file_error] = 'File cannot be empty.'
-      end      
-      redirect_to edit_space_path(space)
-    else
-      redirect_to spaces_path
+      end
+      @photo.space_id = params[:photo][:space_id]
+
+      render 'new'
     end
   end
 
   def edit
-    @photo = Photo.find(params[:id])
+    @photo = Photo.where(id: params[:id]).first
+    @space = @photo.space
   end
 
   def update
@@ -29,7 +38,7 @@ class PhotosController < ApplicationController
     if photo.valid?
       photo.save
       flash[:success] = 'Your image has been updated'
-      redirect_to space_path(photo.album.space)
+      redirect_to space_path(photo.space)
     else
       flash[:error] = 'Your change has not been saved'
       render 'edit'
@@ -38,7 +47,7 @@ class PhotosController < ApplicationController
 
   def destroy
     photo = Photo.find(params[:id])
-    space = photo.album.space
+    space = photo.space
     photo.destroy
     flash[:success] = "Your image has been deleted"
     redirect_to edit_space_path(space)

@@ -12,16 +12,17 @@ feature 'Manage photos' do
       fill_in 'Password', with: user.password
       click_button 'Log In'
       visit edit_space_path(space)
+      click_link 'Add Image'
       within("#add_image") do
         fill_in 'photo_name', with: 'Masterpiece #3'
         attach_file('photo_image', File.join(Rails.root, 'spec/support/rainbow_ferret.png'))
         click_button 'Upload'
       end
-      expect(space.albums.first.photos.count).to eq(1)
+      expect(space.photos.count).to eq(1)
 
       click_link 'Delete Image'
 
-      expect(space.albums.first.photos.count).to eq(0)
+      expect(space.photos.count).to eq(0)
       expect(page).to_not have_xpath('//*[@id="Masterpiece #3"]')
       expect(page).to have_content 'Your image has been deleted'
     end
@@ -35,6 +36,7 @@ feature 'Manage photos' do
       fill_in 'Password', with: user.password
       click_button 'Log In'
       visit edit_space_path(space)
+      click_link 'Add Image'
       within("#add_image") do
         fill_in 'photo_name', with: 'Masterpiece #3'
         attach_file('photo_image', File.join(Rails.root, 'spec/support/rainbow_ferret.png'))

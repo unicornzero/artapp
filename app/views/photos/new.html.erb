@@ -1,0 +1,27 @@
+<h3>Add an Image</h3>
+<br>
+
+<div id="error_explanation">
+  <% if @photo.errors.any? %>
+    <h3><%= pluralize(@photo.errors.count, "error") %> prohibited this update:</h3>
+    <ul>
+    <% @photo.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div id="add_image">
+  <%= form_for [@space, @photo], multipart: true do |f| %>
+    <%= f.hidden_field :space_id %>
+
+    <%= f.label 'Image Name' %>
+    <%= f.text_field :name %>
+
+    <%= f.label :file %>
+    <%= f.file_field :image %>
+
+    <%= f.submit "Upload" %>
+  <% end %>
+</div>

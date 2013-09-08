@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907021702) do
+ActiveRecord::Schema.define(version: 20130908193613) do
 
   create_table "albums", force: true do |t|
     t.integer  "space_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20130907021702) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"
+    t.integer  "space_id"
   end
 
   create_table "spaces", force: true do |t|

@@ -1,6 +1,6 @@
 <h1>Edit Image</h1>
 
-<%= form_for @photo do |f| %>
+<%= form_for [@space, @photo] do |f| %>
 
   <%= f.label 'Image Name' %>
   <%= f.text_field :name %>

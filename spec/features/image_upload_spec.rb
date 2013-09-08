@@ -11,6 +11,7 @@ feature 'Image Uploads' do
     click_button 'Log In'
 
     visit edit_space_path(space)
+    click_link 'Add Image'
     within("#add_image") do
       fill_in 'photo_name', with: 'Masterpiece #3'
       attach_file('photo_image', File.join(Rails.root, 'spec/support/rainbow_ferret.png'))
@@ -40,12 +41,14 @@ feature 'Image Uploads' do
     click_button 'Log In'
 
     visit edit_space_path(space)
+    click_link 'Add Image'
+
     within("#add_image") do
       click_button 'Upload'
     end
 
-    expect(page).to have_content 'Name cannot be blank'
-    expect(page).to have_content 'File cannot be empty'
+    expect(page).to have_content "Name can't be blank"
+    expect(page).to have_content "Image can't be blank"
     expect(page).to have_content 'Your image has not been saved'
   end
 

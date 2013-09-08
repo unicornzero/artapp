@@ -50,8 +50,10 @@ feature 'Space' do
 
     visit edit_space_path(space)
     expect(page).to have_content space.name
-    fill_in 'Name', with: 'Modified Name'
-    click_button 'Save'
+    within('#edit_space') do
+      fill_in 'Name', with: 'Modified Name'
+      click_button 'Save'
+    end
 
     expect(page).to have_content 'Your changes have been saved'
     expect(page).to have_content 'Modified Name'

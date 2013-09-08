@@ -1,16 +1,9 @@
 class Space < ActiveRecord::Base
-  has_many :albums, dependent: :destroy
-  has_many :photos, through: :albums
-  
+
+  has_many :photos, dependent: :destroy
+ # accepts_nested_attributes_for :photos
   validates :name, presence:   true,
                   length: { maximum: 50 }, 
                   uniqueness: true
-
-  after_create :create_default_album
-
-private
-  def create_default_album
-    self.albums.create(name: "default")
-  end
 
 end

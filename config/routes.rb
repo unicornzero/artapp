@@ -8,10 +8,14 @@ Artapp::Application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
 
   resources :sessions
-  resources :spaces 
+  resources :spaces do
+    resources :photos
+  end
+    
+
   resources :space_imports
   resources :users
-  resources :photos
+
 
 
 

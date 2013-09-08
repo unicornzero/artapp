@@ -1,56 +1,29 @@
 <h1>Edit Space: <%= @space.name %></h1>
 
 <br>
-<% if @space.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@space.errors.count, "error") %> prohibited this update:</h2>
-    <ul>
-    <% @space.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-<div id="add_image">
-<h3>Add an Image</h3>
-  <%= form_for @photo, multipart: true do |f| %>
-
-    <%= f.hidden_field :album_id %>
-
-    <%= f.label 'Image Name' %>
+<div id='edit_space'>
+  <h4>Edit Space Details</h4>
+  <%= form_for @space do |f| %>
+    <%= f.label :name %>
     <%= f.text_field :name %>
 
-    <%= f.label :file %>
-    <%= f.file_field :image %>
-
-    <%= f.submit "Upload" %>
+    <%= f.submit 'Save Changes' %>
   <% end %>
 </div>
-
-
 <br>
-
-<%= form_for @space do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.submit 'Save Changes' %>
-<% end %>
-
+<%= link_to 'Add Image', new_space_photo_path(@space) %>
 <br>
-<br>
-
-<h2>Images</h2>
 
 <% if @photos %>
+<h2>Images</h2>
   <% @photos.each do |photo| %>
     <% unless photo.name == nil %>
-    <p>
+      <p>
       <h4><%= photo.name %> </h4>
       <%= image_tag photo.image, id: photo.name %><br>
-      <%= link_to 'Edit Image', edit_photo_path(photo) %><br>
-      <%= link_to 'Delete Image', photo_path(photo), method: :delete, id: photo.name %>
-    </p>
+      <%= link_to 'Edit Image', edit_space_photo_path(@space, photo) %><br>
+      <%= link_to 'Delete Image', space_photo_path(@space, photo), method: :delete, id: photo.name %>
+      </p>
     <% end %>
   <% end %>
 <% end %>
