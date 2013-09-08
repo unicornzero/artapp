@@ -16,7 +16,7 @@ class SpacesController < ApplicationController
       redirect_to @space
     else
       flash[:error] = 'Error- Your changes have not been saved'
-      render 'new'
+      redirect_to 'edit'
     end
   end
 
@@ -26,20 +26,20 @@ class SpacesController < ApplicationController
 
   def edit
     @space = Space.find(params[:id])
-    @album = @space.albums.first
-    @new_photo = @album.photos.build
-    @photos = @album.photos
+    @photos = @space.albums.first.photos
+    @new_photo = @photos.new
   end
 
   def update
     @space = Space.find(params[:id])
+    @photos = @space.albums.first.photos
+    @new_photo = @photos.new
     if @space.update_attributes(params.require(:space).permit(:name))
-      flash[:success] = 'Your changes have been saved.'
-      redirect_to @space
+      flash.now[:success] = 'Your changes have been saved.'
     else
-      flash[:error] = 'Error- Your changes have not been saved'
-      render 'edit'
+      flash.now[:error] = 'Error- Your changes have not been saved'
     end
+      render :edit
   end
 
 private

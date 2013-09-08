@@ -1,5 +1,5 @@
 class Space < ActiveRecord::Base
-  has_many :albums
+  has_many :albums, dependent: :destroy
   has_many :photos, through: :albums
   
   validates :name, presence:   true,
@@ -10,7 +10,7 @@ class Space < ActiveRecord::Base
 
 private
   def create_default_album
-    self.albums.create(name: "default album")
+    self.albums.create(name: "default")
   end
 
 end

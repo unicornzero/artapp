@@ -8,6 +8,6 @@ describe Album do
   it { should allow_value("My Album Name").for(:name) }
   it { should_not allow_value("a" * 201).for(:name) }
 
-  it 'should delete associated albums when deleted'
+  it 'should delete associated photos when deleted'
 
  end

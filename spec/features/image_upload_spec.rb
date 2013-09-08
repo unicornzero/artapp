@@ -2,8 +2,6 @@ require 'spec_helper'
 
 feature 'Image Uploads' do
   scenario 'logged-in user can upload an image' do  
-    
-
     user = create(:user)
     space = create(:space)
     visit root_path
@@ -24,7 +22,32 @@ feature 'Image Uploads' do
     expect(page).to have_content 'Your image has been uploaded'
   end
 
-  scenario 'guest can not upload image'
-  scenario 'multiple images'
-  scenario 'display errors if invalid upload'
+  scenario 'guest can not upload image' do
+    space = create(:space)
+
+    visit edit_space_path(space)
+
+    expect(page).to have_content 'Not Authorized'
+  end
+
+  scenario 'display errors if invalid upload' do
+    user = create(:user)
+    space = create(:space)
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
+
+    visit edit_space_path(space)
+    within("#add_image") do
+      click_button 'Upload'
+    end
+
+    expect(page).to have_content 'Name cannot be blank'
+    expect(page).to have_content 'File cannot be empty'
+    expect(page).to have_content 'Your image has not been saved'
+  end
+
+
 end

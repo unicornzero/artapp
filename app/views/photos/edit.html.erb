@@ -1,0 +1,9 @@
+<h1>Edit Image</h1>
+
+<%= form_for @photo do |f| %>
+
+  <%= f.label 'Image Name' %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Save" %>
+<% end %>
