@@ -3,7 +3,9 @@
 <br>
 
 <div id='space_details'>
-  Website: <%= link_to @space.url, @space.url %>
+  <% if @space.url %>
+    Website: <%= link_to @space.url, @space.url %>
+  <% end %>
 </div>
 
 <br>

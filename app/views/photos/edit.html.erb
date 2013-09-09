@@ -7,4 +7,4 @@
 
   <%= f.submit "Save" %>
 <% end %>
-<%= link_to 'Delete Image', space_photo_path(@space, @photo), method: :delete, id: @photo.name %>
+<%= link_to 'Delete Image', space_photo_path(@space, @photo), data: {confirm: 'Are you sure?' }, method: :delete, id: @photo.name %>

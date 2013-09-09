@@ -20,7 +20,9 @@ feature 'Manage photos' do
       end
       expect(space.photos.count).to eq(1)
 
+      visit edit_space_path(space)
       click_link 'Delete Image'
+      #click_button 'OK' #javascript
 
       expect(space.photos.count).to eq(0)
       expect(page).to_not have_xpath('//*[@id="Masterpiece #3"]')
