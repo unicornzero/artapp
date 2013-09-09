@@ -1,0 +1,14 @@
+# CONFIG Variables
+#   This contains secure account information.
+#   These are merged into the CONFIG hash via
+#   the config/application.rb file.
+# 
+#   This app must have a correctly configured 
+#   config/application.rb file to function as
+#   designed.
+################################################
+
+testy: "this is my test string"
+
+gmail_username: 'you@gmail.com'
+gmail_password: 'your_password'

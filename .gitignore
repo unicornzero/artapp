@@ -18,3 +18,6 @@
 # Ignore user uploaded images
 /public/uploads/photo/image/*
 /public/uploads/tmp/*
+
+# Ignore local configuration file
+/config/application.yml
