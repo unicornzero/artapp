@@ -1,5 +1,5 @@
 <h1>Edit Image</h1>
-
+<%= image_tag @photo.image %>
 <%= form_for [@space, @photo] do |f| %>
 
   <%= f.label 'Image Name' %>
@@ -7,3 +7,4 @@
 
   <%= f.submit "Save" %>
 <% end %>
+<%= link_to 'Delete Image', space_photo_path(@space, @photo), method: :delete, id: @photo.name %>

@@ -11,9 +11,8 @@
   <% end %>
 </div>
 <br>
-<%= link_to 'Add Image', new_space_photo_path(@space) %>
 <br>
-
+<%= link_to 'Add Image', new_space_photo_path(@space) %>
 <% if @photos %>
 <h2>Images</h2>
   <% @photos.each do |photo| %>
