@@ -7,12 +7,11 @@ Artapp::Application.routes.draw do
   delete 'logout', to: 'sessions#destroy', as: 'logout'
   get 'signup', to: 'users#new', as: 'signup'
 
+  resources :password_resets
   resources :sessions
   resources :spaces do
     resources :photos
   end
-    
-
   resources :space_imports
   resources :users
 
