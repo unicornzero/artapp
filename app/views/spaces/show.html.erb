@@ -14,7 +14,8 @@
   <div id='space_photos'>
     <% @space.photos.each do |photo| %>
       <h4><%= photo.name %></h4>
-      <p><%= image_tag photo.image %></p>
+      <p>      <%= image_tag photo.image_url(:medium), id: photo.name %><br>
+</p>
     <% end %>
   </div>
 <% end %>

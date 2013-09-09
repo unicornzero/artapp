@@ -17,3 +17,4 @@
 
 # Ignore user uploaded images
 /public/uploads/photo/image/*
+/public/uploads/tmp/*

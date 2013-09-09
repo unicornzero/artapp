@@ -19,7 +19,9 @@
     <% unless photo.name == nil %>
       <p>
       <h4><%= photo.name %> </h4>
-      <%= image_tag photo.image, id: photo.name %><br>
+      <%= image_tag photo.image_url(:medium), id: photo.name %><br>
+
+
       <%= link_to 'Edit Image', edit_space_photo_path(@space, photo) %><br>
       <%= link_to 'Delete Image', space_photo_path(@space, photo), data: {confirm: 'Are you sure?' }, method: :delete, id: photo.name %>
       </p>

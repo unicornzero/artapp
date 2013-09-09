@@ -1,5 +1,5 @@
 <h1>Edit Image</h1>
-<%= image_tag @photo.image %>
+<%= image_tag @photo.image_url(:large) %>
 <%= form_for [@space, @photo] do |f| %>
 
   <%= f.label 'Image Name' %>
@@ -7,4 +7,17 @@
 
   <%= f.submit "Save" %>
 <% end %>
-<%= link_to 'Delete Image', space_photo_path(@space, @photo), data: {confirm: 'Are you sure?' }, method: :delete, id: @photo.name %>
+
+<br><br>
+
+<%= link_to 'Delete Image', space_photo_path(@space, @photo), data: {confirm: 'Are you sure?' }, method: :delete, id: @photo.name %><br><br>
+<%= link_to 'Return to the Edit Space page', edit_space_path(@space) %>
+
+<br>
+<br>
+<h3>Image Sizes</h3>
+<p>Thumbnail: <br><%= image_tag @photo.image_url(:thumbnail) %><br></p>
+<p>Small: <br><%= image_tag @photo.image_url(:small) %><br></p>
+<p>Medium: <br><%= image_tag @photo.image_url(:medium) %><br></p>
+<p>Large: <br><%= image_tag @photo.image_url(:large) %><br></p>
+<p>Original: <br><%= image_tag @photo.image, id: @photo.name %><br></p>
