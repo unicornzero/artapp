@@ -7,12 +7,12 @@ class User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX }, 
                     length: { maximum: 100 },
                     uniqueness: true
-  validates :password, length: { minimum: 6, maximum: 16 }
+  validates :password, presence: true, length: { minimum: 6, maximum: 16 }, on: :create
 
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
-    save
+    self.save!
     Mailer.password_reset(self).deliver
   end
 
@@ -20,6 +20,12 @@ class User < ActiveRecord::Base
   	begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+
+  def delete_token_after_password_reset
+  end
+
+  def require_password_length_when_it_is_reset
   end
 
 end
