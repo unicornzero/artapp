@@ -1,6 +1,15 @@
-<h1>Password Reset</h1>
+<h1>Reset Password</h1>
 
 <%= form_for @user, url: password_reset_path(params[:id]) do |f| %>
+
+  <% if @user.errors.any? %>
+    <h3><%= pluralize(@user.errors.count, 'error') %> prevented your new password from being saved:</h3>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
 
   <%= f.label :password, 'New Password' %>
   <%= f.password_field :password %>

@@ -6,8 +6,11 @@ class User < ActiveRecord::Base
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX }, 
                     length: { maximum: 100 },
-                    uniqueness: true
-  validates :password, presence: true, length: { minimum: 6, maximum: 16 }, on: :create
+                    uniqueness: { case_sensitive: false }
+  validates :password, length: { minimum: 6, 
+                                 maximum: 16 }, 
+                       confirmation: true,
+                       if: :validate_password?
 
   def send_password_reset
     generate_token(:password_reset_token)
@@ -28,4 +31,7 @@ class User < ActiveRecord::Base
   def require_password_length_when_it_is_reset
   end
 
+  def validate_password?
+    true unless password.nil? && password_confirmation.nil?
+  end
 end

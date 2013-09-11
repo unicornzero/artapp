@@ -46,4 +46,5 @@ feature 'User authentication' do
     expect(page).to_not have_content 'Log Out'
   end
 
+  it 'errors if invalid credentials'
 end

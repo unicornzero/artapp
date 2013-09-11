@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <p>Current params: <%= params.to_hash if params %></p>
   <% flash.each do |name, msg| -%>
     <%= content_tag :div, msg, class: name %>
   <% end -%>
