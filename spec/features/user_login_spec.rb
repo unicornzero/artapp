@@ -46,5 +46,42 @@ feature 'User authentication' do
     expect(page).to_not have_content 'Log Out'
   end
 
-  it 'errors if invalid credentials'
+  it 'errors if invalid email' do
+    user = create(:user)
+
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: 'wrong@email.com'
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
+
+    expect(page).to have_content 'Log In'
+    expect(page).to have_content 'Invalid login information'
+  end
+
+  it 'errors if invalid password' do
+    user = create(:user)
+
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: '1fakepw'
+    click_button 'Log In'
+
+    expect(page).to have_content 'Log In'
+    expect(page).to have_content 'Invalid login information'
+  end
+
+  it 'errors if blank login' do
+    user = create(:user)
+
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: '1fakepw'
+    click_button 'Log In'
+
+    expect(page).to have_content 'Log In'
+    expect(page).to have_content 'Invalid login information'
+  end
 end

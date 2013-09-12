@@ -25,13 +25,12 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 
-  def delete_token_after_password_reset
-  end
-
-  def require_password_length_when_it_is_reset
+  def reset_password_token
+    update_column(:password_reset_token, nil)
   end
 
   def validate_password?
     true unless password.nil? && password_confirmation.nil?
   end
+
 end

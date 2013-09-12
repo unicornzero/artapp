@@ -20,14 +20,11 @@ class PasswordResetsController < ApplicationController
     else
       @user.update_attributes(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
       if @user.save
-        hashy = params
-        redirect_to root_url, notice: "Password has been reset! #{hashy}"
+        @user.reset_password_token
+        redirect_to root_url, notice: "Password has been reset!"
       else
         render :edit, notice: 'Please try again.'
       end
     end
-    #@user.password = params[:user][:password]
-    #@user.password_confirmation = params[:user][:password_confirmation]
-    #@user.assign_attributes(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
   end
 end

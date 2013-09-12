@@ -10,8 +10,8 @@ describe "PasswordResets" do
     click_button 'Reset Password'
 
     current_path.should eq(root_path)
-    expect(page).to have_content('email sent')
-    expect(last_email.to).to include(user.email)
+    expect(page).to have_content 'email sent' 
+    expect(last_email.to).to include user.email
   end
 
   it 'does not email invalid user' do
@@ -21,7 +21,7 @@ describe "PasswordResets" do
     click_button 'Reset Password'
 
     current_path.should eq(root_path)
-    expect(page).to have_content('email sent')
+    expect(page).to have_content 'email sent'
     expect(last_email).to be_nil
   end
 
@@ -32,7 +32,7 @@ describe "PasswordResets" do
     fill_in 'Confirm New Password', with: 'foobar'
     click_button 'Update Password'
 
-    expect(page).to have_content('Password has been reset')
+    expect(page).to have_content 'Password has been reset'
   end
 
   it 'updates password' do
@@ -72,7 +72,7 @@ describe "PasswordResets" do
     visit edit_password_reset_path(user.password_reset_token)
     click_button 'Update Password'
 
-    expect(page).to have_content('Reset Password')
+    expect(page).to have_content 'Reset Password'
     expect(page).to have_content "Password is too short (minimum is 6 characters)"
   end
 
@@ -98,10 +98,27 @@ describe "PasswordResets" do
     expect(page).to have_content "Password confirmation doesn't match Password"
   end
 
-  it 'deletes token after password reset'
+  it 'requires password length validation' do
+    user = create(:user, password_reset_token: 'something', password_reset_sent_at: 1.hour.ago)
+    visit edit_password_reset_path(user.password_reset_token)
+    fill_in 'New Password', with: 'new'
+    fill_in 'Confirm New Password', with: 'new'
+    click_button 'Update Password'
 
-  it 'requires password length validation'
+    expect(page).to have_content 'Reset Password'
+    expect(page).to have_content "Password is too short (minimum is 6 characters)"
+  end
 
 
+  it 'deletes token after password reset' do
+    user = create(:user, password_reset_token: 'something', password_reset_sent_at: 1.hour.ago)
+    visit edit_password_reset_path(user.password_reset_token)
+    fill_in 'New Password', with: 'foobar'
+    fill_in 'Confirm New Password', with: 'foobar'
+    click_button 'Update Password'
 
+    my_action = lambda { visit edit_password_reset_path(user.password_reset_token) }
+
+    expect(my_action).to raise_exception(ActiveRecord::RecordNotFound)
+  end
 end
