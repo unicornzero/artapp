@@ -1,4 +1,12 @@
+Image Management
+---------------------
 mini_magick is required for image resizing in this application. RMagick requires Imagemagick. On OS X, try "brew install imagemagick". On Linux, try "sudo apt-get install imagemagick"
 
 Setup mailing in config/environments files for both production and development. Equivalent line in test.rb is:
 config.action_mailer.default_url_options = { :host => 'www.example.com' }
+
+
+Redis & Resque
+---------------------
+Redis setup: http://redis.io/download
+

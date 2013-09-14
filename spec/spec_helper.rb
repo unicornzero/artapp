@@ -46,4 +46,12 @@ RSpec.configure do |config|
   config.include(MailerMacros)
   config.before(:each) { reset_email }
 
+
+  config.around(:each, type: :feature) do |example|
+    run_background_jobs_immediately do
+      example.run
+    end
+  end
+
+  config.include BackgroundJobs
 end

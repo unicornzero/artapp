@@ -60,3 +60,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'carrierwave'
 gem 'mini_magick'
+gem "resque", "~> 1.24.1"

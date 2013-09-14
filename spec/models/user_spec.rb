@@ -64,6 +64,7 @@ describe User do
     end
 
     it 'delivers email to user' do
+      Resque.inline = true
       user.send_password_reset
 
       expect(last_email.to).to include(user.email)
