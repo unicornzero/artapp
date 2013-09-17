@@ -10,10 +10,10 @@ end
 
 group :test do
   gem "capybara", "~> 2.1.0"
+  gem "capybara-webkit"
   gem "database_cleaner", "~> 1.0.1"
   gem "launchy", "~> 2.3.0"
   gem "faker", "~> 1.1.2"
-  #see capybara docs for headless browser js testing
   gem "shoulda-matchers"
 end
 
@@ -61,3 +61,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'carrierwave'
 gem 'mini_magick'
 gem "resque", "~> 1.24.1"
+gem 'stripe'

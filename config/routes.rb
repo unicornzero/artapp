@@ -13,6 +13,7 @@ Artapp::Application.routes.draw do
     resources :photos
   end
   resources :space_imports
+  resources :subscriptions
   resources :users
 
 
