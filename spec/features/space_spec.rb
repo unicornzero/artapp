@@ -22,6 +22,7 @@ feature 'Space' do
   end
 
   scenario 'logged-in user can create' do
+    pending 'need to remove'
     user = create(:user)
     space = attributes_for(:space)
     visit root_path
@@ -40,6 +41,7 @@ feature 'Space' do
   end
 
   scenario 'logged-in user can edit' do
+    pending 'need to remove'
     user = create(:user)
     visit root_path
     click_link 'Log In'
@@ -67,4 +69,58 @@ feature 'Space' do
     expect(page).to have_content 'Not Authorized'
   end
 
+  scenario 'superadmin user can edit' do
+    user = create(:user, superadmin: true)
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
+    space = create(:space)
+
+    visit edit_space_path(space)
+    expect(page).to have_content space.name
+    within('#edit_space') do
+      fill_in 'Name', with: 'Modified Name'
+      click_button 'Save'
+    end
+
+    expect(page).to have_content 'Your changes have been saved'
+    expect(page).to have_content 'Modified Name'
+  end
+
+  scenario 'unauthorized user cannot edit' do
+    user = create(:user)
+    other_user = create(:user)
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
+    space = create(:space, user_id: other_user.id)
+
+    visit edit_space_path(space)
+
+    expect(page).to have_content 'Not Authorized'
+  end
+
+  scenario 'owner can edit' do
+    user = create(:user)
+    space = create(:space, user_id: user.id)
+    visit root_path
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
+
+    visit edit_space_path(space)
+    expect(page).to have_content space.name
+    within('#edit_space') do
+      fill_in 'Name', with: 'Modified Name'
+      click_button 'Save'
+    end
+
+    expect(page).to have_content 'Your changes have been saved'
+    expect(page).to have_content 'Modified Name'
+  end
 end

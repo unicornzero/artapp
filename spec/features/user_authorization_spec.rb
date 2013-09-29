@@ -8,13 +8,13 @@ feature 'User authorization' do
     expect(current_path).to eq root_path
   end
 
-  scenario 'logged-in user can view admin page' do
+  scenario 'superadmin user can view admin page' do
+    user = create(:user, superadmin: true)
     visit root_path
-    click_link 'Sign Up'
-    fill_in 'Email', with: 'user1@example.com'
-    fill_in 'Password', with: 'password1'
-    fill_in 'Confirm Password', with: 'password1'
-    click_button 'Create Your Account'
+    click_link 'Log In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
 
     visit adminz_path
     

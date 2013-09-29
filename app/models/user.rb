@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  has_many :spaces
   has_secure_password
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -34,4 +35,11 @@ class User < ActiveRecord::Base
     true unless password.nil? && password_confirmation.nil?
   end
 
+  def set_super_admin(setting, passphrase)
+    update_column(:superadmin, setting) if passphrase == CONFIG[:sapass]
+  end
+
+  def super_admin?
+    superadmin
+  end
 end

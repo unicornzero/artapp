@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 feature 'Import Spaces' do
-  scenario 'logged-in user can import spaces' do
-    user = create(:user)
+  scenario 'superadmin can import spaces' do
+    user = create(:user, superadmin: true)
     visit root_path
     click_link 'Log In'
     fill_in 'Email', with: user.email

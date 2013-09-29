@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 feature 'Image Uploads' do
-  scenario 'logged-in user can upload an image' do  
+  scenario 'space owner can upload an image' do  
     user = create(:user)
-    space = create(:space)
+    space = create(:space, user_id: user.id)
     visit root_path
     click_link 'Log In'
     fill_in 'Email', with: user.email
@@ -33,7 +33,7 @@ feature 'Image Uploads' do
 
   scenario 'display errors if invalid upload' do
     user = create(:user)
-    space = create(:space)
+    space = create(:space, user_id: user.id)
     visit root_path
     click_link 'Log In'
     fill_in 'Email', with: user.email

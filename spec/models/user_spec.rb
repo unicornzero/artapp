@@ -14,6 +14,7 @@ describe User do
     it { should_not allow_value("@.com").for(:email) }
     it { should_not allow_value("@example.com").for(:email) }
     it { should_not allow_value("a" * 100 + "@example.com").for(:email) }
+    it { should have_many(:spaces) }
     
     it 'validates uniqueness of email' do
       user1 = create(:user, email: 'myemail@example.com' )
@@ -68,6 +69,16 @@ describe User do
       user.send_password_reset
 
       expect(last_email.to).to include(user.email)
+    end
+  end
+
+  context '#set_super_admin' do
+    it 'sets user to super_admin' do
+      passphrase = CONFIG[:sapass]
+      user = create(:user)
+      user.set_super_admin(true, passphrase)
+
+      expect(user).to be_super_admin
     end
   end
 end

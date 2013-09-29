@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 feature 'Manage photos' do
-  context 'logged-in user' do
+  context 'space-owner' do
 
     scenario 'can delete a photo' do
       user = create(:user)
-      space = create(:space)
+      space = create(:space, user_id: user.id)
       visit root_path
       click_link 'Log In'
       fill_in 'Email', with: user.email
@@ -31,7 +31,7 @@ feature 'Manage photos' do
 
     scenario 'can change photo name' do
       user = create(:user)
-      space = create(:space)
+      space = create(:space, user_id: user.id)
       visit root_path
       click_link 'Log In'
       fill_in 'Email', with: user.email
