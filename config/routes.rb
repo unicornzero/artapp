@@ -6,6 +6,7 @@ Artapp::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
   get 'signup', to: 'users#new', as: 'signup'
+  get 'account', to: 'users#show', as: 'account'
 
   resources :password_resets
   resources :sessions

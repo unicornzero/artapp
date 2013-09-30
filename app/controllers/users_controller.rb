@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
 
-  before_action :authorize, only: :admin_page
+  before_action :authorize, only: [:admin_page, :show]
 
   def index
     @users = User.all
+  end
+
+  def show
+    @user = current_user
+    @pages = current_user.spaces
   end
 
   def new

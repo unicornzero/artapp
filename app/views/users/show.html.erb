@@ -1,0 +1,15 @@
+<h1>Your Account</h1>
+<p>
+  Email: <%= @user.email %>
+</p>
+
+<br>
+
+<% if @pages.any? %>
+  <h2>Your Pages</h2>
+  <% @pages.each do |page| %>
+    <%= page.name %><br>
+    <%= link_to 'Edit Page', edit_space_path(page) %> | 
+    <%= link_to 'View Page', space_path(page) %>
+  <% end %>
+<% end %>

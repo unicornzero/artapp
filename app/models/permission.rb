@@ -7,6 +7,7 @@ class Permission
     allow :photos, [:show]
     if user
       allow_all if user.superadmin
+      allow :users, :show
       allow :spaces, [:edit, :update] do |space|
         space.user_id == user.id
       end

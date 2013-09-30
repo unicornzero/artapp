@@ -23,6 +23,7 @@ describe Permission do
       it { should permit("spaces", "show", space) }
       it { should_not permit("spaces", "edit") }
       it { should_not permit("photos", "edit") }
+      it { should_not permit("users", "show") }
     end
 
     context 'user' do
@@ -31,16 +32,17 @@ describe Permission do
       it { should permit("users", "index") }
       it { should permit("spaces", "index") }
       it { should permit("photos", "show") }
+      it { should permit("users", "show") }
       it { should permit("spaces", "show", space) }
       it { should_not permit("spaces", "edit") }
       it { should_not permit("photos", "edit") }
-
     end
 
     context 'superadmin' do
       subject { Permission.new(build(:user, superadmin: true)) }
       let(:space) { create(:space) }
       it { should permit("users", "index") }
+      it { should permit("users", "show") }
       it { should permit("spaces", "index") }
       it { should permit("spaces", "show", space) }
       it { should permit("spaces", "edit") }
@@ -63,6 +65,7 @@ describe Permission do
                                     space_id: other_space.id) }
       subject { Permission.new(user)}
       it { should permit("users", "index") }
+      it { should permit("users", "show") }
       it { should permit("spaces", "index") }
       it { should permit("spaces", "show", other_space) }
       it { should permit("spaces", "edit", owned_space) }
