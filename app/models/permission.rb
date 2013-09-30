@@ -10,7 +10,7 @@ class Permission
       allow :spaces, [:edit, :update] do |space|
         space.user_id == user.id
       end
-      allow :photos, [:create, :edit, :update, :destroy] do |space|
+      allow :photos, [:new, :create, :edit, :update, :destroy] do |space|
         space.user_id == user.id
       end
     end
