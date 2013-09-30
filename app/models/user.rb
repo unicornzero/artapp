@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
     self.password_reset_sent_at = Time.zone.now
     self.save!  
     Resque.enqueue(UserResetPasswordMailer, id)  
-    #Mailer.password_reset(self).deliver
   end
 
   def generate_token(column)

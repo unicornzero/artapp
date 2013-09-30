@@ -5,7 +5,6 @@ class Permission
     allow :users, [:new, :create, :index]
     allow :spaces, [:index, :show]
     allow :photos, [:show]
-    #sessions and other things
     if user
       allow_all if user.superadmin
       allow :spaces, [:edit, :update] do |space|

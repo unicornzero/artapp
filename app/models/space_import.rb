@@ -45,7 +45,4 @@ class SpaceImport
     end
     file_spaces
   end
-
-
-
 end
