@@ -40,6 +40,7 @@ class SpacesController < ApplicationController
     redirect_to edit_space_path(@space)
   end
 
+private
   def current_resource
     if params[:id]
       Space.find(params[:id])

@@ -48,6 +48,7 @@ class PhotosController < ApplicationController
     redirect_to edit_space_path(space)
   end
 
+private
   def current_resource
     if params[:space_id]
       Space.find(params[:space_id])
