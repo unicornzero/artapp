@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
 
-  before_action :authorize, except: :new
+  before_action :authorize
 
   def new
     @space = Space.find(params[:space_id])
