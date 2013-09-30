@@ -12,14 +12,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: 'Not Authorized.' unless current_permission.allow?(params[:controller], params[:action], current_resource)
   end
 
-  def oldauthorize
-    if params[:id] && !current_permission.allow?(params[:controller], params[:action], params[:id])
-      redirect_to root_url, alert: 'Not Authorized.'
-    elsif !params[:id] && !current_permission.allow?(params[:controller], params[:action])
-      redirect_to root_url, alert: 'Not Authorized.'
-    end
-  end
-
   def current_permission
     @current_permission ||= Permission.new(current_user)
   end
