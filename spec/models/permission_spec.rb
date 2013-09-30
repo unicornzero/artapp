@@ -15,14 +15,23 @@ describe Permission do
   describe '#allow?' do
     context 'guest' do
       subject { Permission.new(nil) }
+      let(:space) { create(:space) }
       it { should permit("users", "index") }
+      it { should permit("spaces", "index") }
+      it { should permit("spaces", "show") }
+      it { should permit("photos", "show") }
+      it { should permit("spaces", "show", space) }
       it { should_not permit("spaces", "edit") }
       it { should_not permit("photos", "edit") }
     end
 
     context 'user' do
       subject { Permission.new(build(:user)) }
+      let(:space) { create(:space) }
       it { should permit("users", "index") }
+      it { should permit("spaces", "index") }
+      it { should permit("photos", "show") }
+      it { should permit("spaces", "show", space) }
       it { should_not permit("spaces", "edit") }
       it { should_not permit("photos", "edit") }
 
@@ -30,9 +39,18 @@ describe Permission do
 
     context 'superadmin' do
       subject { Permission.new(build(:user, superadmin: true)) }
+      let(:space) { create(:space) }
       it { should permit("users", "index") }
+      it { should permit("spaces", "index") }
+      it { should permit("spaces", "show", space) }
       it { should permit("spaces", "edit") }
+      it { should permit("photos", "show") }
+      it { should permit("photos", "create") }
       it { should permit("photos", "edit") }
+      it { should permit("photos", "update") }
+      it { should permit("photos", "destroy") }
+
+
     end
 
     context 'space-owner' do
@@ -45,14 +63,21 @@ describe Permission do
                                     space_id: other_space.id) }
       subject { Permission.new(user)}
       it { should permit("users", "index") }
+      it { should permit("spaces", "index") }
+      it { should permit("spaces", "show", other_space) }
       it { should permit("spaces", "edit", owned_space) }
-      it { should_not permit("spaces", "edit", other_space) }
-      it { should permit("photos", "edit", owned_photo) }
-      it { should_not permit("photos", "edit", other_photo) }
       it { should permit("spaces", "update", owned_space) }
+      it { should_not permit("spaces", "edit", other_space) }
       it { should_not permit("spaces", "update", other_space) }
-      it { should permit("photos", "update", owned_photo) }
-      it { should_not permit("photos", "update", other_photo) }
+
+      it { should permit("photos", "show") }
+      it { should permit("photos", "create", owned_space) }
+      it { should permit("photos", "edit", owned_space) }
+      it { should permit("photos", "update", owned_space) }
+      it { should permit("photos", "destroy", owned_space) }
+      it { should_not permit("photos", "edit", other_space) }
+      it { should_not permit("photos", "update", other_space) }
+      it { should_not permit("photos", "destroy", other_space) }
     end
 
   end  

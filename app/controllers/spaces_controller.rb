@@ -1,5 +1,5 @@
 class SpacesController < ApplicationController
-  before_action :authorize, only: [:new, :create, :edit, :update]
+  before_action :authorize
 
   def index
     @spaces = Space.all
@@ -40,4 +40,11 @@ class SpacesController < ApplicationController
     redirect_to edit_space_path(@space)
   end
 
+  def current_resource
+    if params[:id]
+      Space.find(params[:id])
+    else
+      Space.new
+    end
+  end
 end

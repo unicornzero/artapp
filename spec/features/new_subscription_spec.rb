@@ -1,7 +1,9 @@
 require 'spec_helper'
 
-feature 'Subscribtion', js: true do
+feature 'Subscription', js: true do
   scenario 'can be created by superadmin' do
+    pending 'must be refactored'
+
     user = create(:user, superadmin: true)
     visit root_path
     click_link 'Log In'

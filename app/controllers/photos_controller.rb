@@ -1,5 +1,7 @@
 class PhotosController < ApplicationController
 
+  before_action :authorize, except: :new
+
   def new
     @space = Space.find(params[:space_id])
     @photo = @space.photos.build
@@ -46,4 +48,9 @@ class PhotosController < ApplicationController
     redirect_to edit_space_path(space)
   end
 
+  def current_resource
+    if params[:space_id]
+      Space.find(params[:space_id])
+    end
+  end
 end

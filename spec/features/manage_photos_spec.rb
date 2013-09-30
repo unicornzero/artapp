@@ -12,6 +12,7 @@ feature 'Manage photos' do
       fill_in 'Password', with: user.password
       click_button 'Log In'
       visit edit_space_path(space)
+
       click_link 'Add Image'
       within("#add_image") do
         fill_in 'photo_name', with: 'Masterpiece #3'

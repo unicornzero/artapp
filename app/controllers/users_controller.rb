@@ -24,4 +24,8 @@ class UsersController < ApplicationController
 
   def admin_page
   end
+
+  def current_resource
+    @current_resource ||= current_user
+  end
 end

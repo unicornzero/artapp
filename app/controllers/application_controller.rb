@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
+    redirect_to root_url, alert: 'Not Authorized.' unless current_permission.allow?(params[:controller], params[:action], current_resource)
+  end
+
+  def oldauthorize
     if params[:id] && !current_permission.allow?(params[:controller], params[:action], params[:id])
       redirect_to root_url, alert: 'Not Authorized.'
     elsif !params[:id] && !current_permission.allow?(params[:controller], params[:action])
@@ -18,5 +22,9 @@ class ApplicationController < ActionController::Base
 
   def current_permission
     @current_permission ||= Permission.new(current_user)
+  end
+
+  def current_resource
+    nil
   end
 end
