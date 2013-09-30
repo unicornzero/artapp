@@ -40,17 +40,6 @@ ActiveRecord::Schema.define(version: 20130928191938) do
     t.string   "stripe_cust_id"
   end
 
-  create_table "subscriptions", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "space_id"
-    t.string   "stripe_customer_token"
-    t.string   "plan"
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "stripe_cust_id"
-  end
-
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password_digest"
