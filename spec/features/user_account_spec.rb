@@ -13,7 +13,7 @@ feature 'User account' do
 
     expect(page).to have_content 'Your Account'
     expect(page).to have_content user.email
-    expect(page).not_to have_content 'Your Pages'
+    expect(page).not_to have_content 'Your Spaces'
   end
 
   scenario 'page owner can see pages' do
@@ -28,7 +28,7 @@ feature 'User account' do
     visit '/account'
 
     expect(page).to have_content 'Your Account'
-    expect(page).to have_content 'Your Pages'
+    expect(page).to have_content 'Your Spaces'
     expect(page).to have_content space.name
     expect(page).to have_content 'Edit Page'
     expect(page).to have_content 'View Page'

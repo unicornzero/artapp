@@ -6,7 +6,7 @@
 <br>
 
 <% if @pages.any? %>
-  <h2>Your Pages</h2>
+  <h2>Your Spaces</h2>
   <% @pages.each do |page| %>
     <%= page.name %><br>
     <%= link_to 'Edit Page', edit_space_path(page) %> | 
