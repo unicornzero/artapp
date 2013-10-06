@@ -21,17 +21,6 @@ describe Space do
     expect(space).to be_valid
   end
 
-  xit 'should find first subscription' do
-    user = create(:user)
-    space = create(:space, user_id: user.id)
-    subscription1 = Subscription.new(user_id: user.id, space_id: space.id).save
-    subscription2 = Subscription.new(user_id: user.id, space_id: space.id).save
-
-    expect(space.subscription).to eq subscription1
-    #inactive subscription test?
-    #should this be in the space model?
-  end
-
   context '#set_owner' do
     it 'associates to a user' do
       user = create(:user)

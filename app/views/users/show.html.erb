@@ -5,13 +5,13 @@
 
 <br>
 
-<% if @pages.any? %>
+<% if @spaces.any? %>
   <h2>Your Spaces</h2><br>
-  <% @pages.each do |space| %>
+  <% @spaces.each do |space| %>
     <h4><%= space.name %></h4>
     <%= link_to 'Edit Page', edit_space_path(space) %> | 
     <%= link_to 'View Page', space_path(space) %><br>
-    <%= link_to 'Manage Subscription', space_subscriptions_path(space) %>
+    <%= link_to 'Manage Subscription', edit_space_subscription_path(space, space.subscription) %>
     <br><br>
 
   <% end %>

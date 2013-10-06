@@ -14,7 +14,7 @@ class Permission
       allow :photos, [:new, :create, :edit, :update, :destroy] do |space|
         space.user_id == user.id
       end
-      allow :subscriptions, [:index, :new, :create] do |space|
+      allow :subscriptions, [:edit, :update] do |space|
         space.user_id == user.id
       end
     end

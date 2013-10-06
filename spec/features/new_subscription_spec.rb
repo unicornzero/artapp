@@ -1,10 +1,12 @@
 require 'spec_helper'
 
   #load stripe api keys based on environment
+  #path is card charged and subscription unsuccessful
   #path for subscription cancellation
   #path for if card charge fails
   #subscribed user can edit more fields
   #subscribed user can publish pro version of space
+  #rename User.stripe_customer_token to stripe_token, maybe save before save subs.
 
 feature 'Subscription' do
   scenario 'page owner sees subscription menu' do

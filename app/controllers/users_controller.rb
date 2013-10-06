@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    @pages = current_user.spaces
+    @spaces = current_user.spaces
   end
 
   def new

@@ -2,8 +2,8 @@
 <br>
 <h3><%= @space.name %></h3>
 <p>
-Current Plan: <%= @subscription.current_plan %><br>
-<% if @subscription.current_plan == 'Basic' %>
+Current Plan: <%= @subscription.plan %><br>
+<% if @subscription.plan == 'Basic' %>
 
   <%= form_for [@space, @subscription] do |f| %>
 
@@ -27,5 +27,7 @@ Current Plan: <%= @subscription.current_plan %><br>
     <%= f.hidden_field :user_id %>
   <% end %>
   <br><br>
+<% elsif @subscription.plan == 'Pro' %>
+Montly payments began: <%= @subscription.created_at %>
 <% end %>
 </p>
