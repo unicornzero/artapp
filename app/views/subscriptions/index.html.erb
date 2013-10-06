@@ -1,0 +1,31 @@
+<h1>Manage Subscription</h1>
+<br>
+<h3><%= @space.name %></h3>
+<p>
+Current Plan: <%= @subscription.current_plan %><br>
+<% if @subscription.current_plan == 'Basic' %>
+
+  <%= form_for [@space, @subscription] do |f| %>
+
+    <% if @subscription.errors.any? %>
+      <ul>
+      <% @subscription.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+
+    <p>Upgrade to Pro:
+    <script
+      src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+      data-key="<%= CONFIG[:stripe_test_public_key] %>"
+      data-amount="1499"
+      data-name="Space Subscription"
+      data-description="Monthly Subscription">
+    </script></p>
+
+    <%= f.hidden_field :user_id %>
+  <% end %>
+  <br><br>
+<% end %>
+</p>

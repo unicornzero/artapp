@@ -1,6 +1,7 @@
 class Space < ActiveRecord::Base
 
   has_many :photos, dependent: :destroy
+  has_one :subscription
   belongs_to :user
   validates :name, presence:   true,
                   length: { maximum: 50 }, 

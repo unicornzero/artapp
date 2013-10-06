@@ -75,6 +75,12 @@ describe Permission do
       it { should_not permit("photos", "edit", other_space) }
       it { should_not permit("photos", "update", other_space) }
       it { should_not permit("photos", "destroy", other_space) }
+
+      it { should permit("subscriptions", "new", owned_space) }
+      it { should permit("subscriptions", "index", owned_space) }
+      it { should_not permit("subscriptions", "index", other_space) }
+      it { should permit("subscriptions", "create", owned_space) }
+
     end
   end  
 end

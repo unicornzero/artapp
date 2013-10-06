@@ -12,9 +12,9 @@ Artapp::Application.routes.draw do
   resources :sessions
   resources :spaces do
     resources :photos
+    resources :subscriptions
   end
   resources :space_imports
-  resources :subscriptions
   resources :users
 
 

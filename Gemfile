@@ -14,7 +14,7 @@ group :test do
   gem "database_cleaner", "~> 1.0.1"
   gem "launchy", "~> 2.3.0"
   gem "faker", "~> 1.1.2"
-  gem "shoulda-matchers"
+  gem "shoulda-matchers", "~> 2.4.0"
 end
 
 # Use sqlite3 as the database for Active Record

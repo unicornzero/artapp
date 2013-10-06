@@ -17,7 +17,7 @@ feature 'Import Spaces' do
     expect(page).to have_content 'Import Complete'
   end
 
-  scenario 'guest can not import spaces', focus: true do
+  scenario 'guest can not import spaces' do
     visit new_space_import_path
 
     expect(page).to have_content 'Not Authorized'

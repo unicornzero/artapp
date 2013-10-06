@@ -1,0 +1,74 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "https://js.stripe.com/v2/" %>
+  <script type="text/javascript">
+    Stripe.setPublishableKey(<%= CONFIG[:stripe_test_public_key] %>);
+
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#new_subscription');
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // token contains id, last4, and card type
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="stripeToken" value='" + token + "'/>').val(token));
+        // and submit
+        $('#subscription_stripe_token').val(token)
+        $form.get(0).submit();
+      }
+    };
+
+    jQuery(function($) {
+      $('#new_subscription').submit(function(event) {
+        var $form = $(this);
+        // Disable the submit button to prevent repeated clicks
+        $form.find('button').prop('disabled', true);
+        Stripe.card.createToken($form, stripeResponseHandler);
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+    });
+  </script>
+<% end %>
+
+<h1>Subscribe to Pro</h1>
+
+<%= form_for [@space, @subscription] do |f| %>
+
+  <% if @subscription.errors.any? %>
+    <h3><%= pluralize(@subscription.errors.count, 'error') %> prevented your account from being created:</h3>
+    <ul>
+    <% @subscription.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.hidden_field :stripe_customer_token %>
+  <div class="field">
+      <%= f.label :stripe_token %>
+      <%= f.text_field :stripe_token %>
+  </div>
+  <div class="field">
+    <%= label_tag :card_number, "Credit Card Number" %>
+    <%= text_field_tag :card_number, nil, name: nil %>
+  </div>
+  <div class="field">
+    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+    <%= text_field_tag :card_code, nil, name: nil %>
+  </div>
+  <div class="field">
+    <%= label_tag :card_month, "Card Expiration" %>
+    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+  </div>
+  <span class="payment-errors"></span>
+<div id="stripe_error">
+    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+  </div>
+  <div class="actions">
+    <%= f.submit "Subscribe" %>
+  </div>
+<% end %>

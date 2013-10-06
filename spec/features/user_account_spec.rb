@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 feature 'User account' do 
+
+  scenario 'guest cannot view account' do
+    visit '/account'
+
+    expect(page).to have_content 'Not Authorized'
+  end
+
   scenario 'logged-in user can see their info' do
     user = create(:user)
     visit root_path
@@ -32,11 +39,5 @@ feature 'User account' do
     expect(page).to have_content space.name
     expect(page).to have_content 'Edit Page'
     expect(page).to have_content 'View Page'
-  end
-
-  scenario 'guest cannot view account' do
-    visit '/account'
-
-    expect(page).to have_content 'Not Authorized'
   end
 end

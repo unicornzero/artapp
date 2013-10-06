@@ -8,14 +8,16 @@ describe User do
     end
 
     it { should validate_presence_of(:email) }
-    it { should_not allow_value("short").for(:password) }
-    it { should_not allow_value("has spaces").for(:email) }
-    it { should_not allow_value("incomplete").for(:email) }
-    it { should_not allow_value("@.com").for(:email) }
-    it { should_not allow_value("@example.com").for(:email) }
-    it { should_not allow_value("a" * 100 + "@example.com").for(:email) }
+    it { should allow_value('me@url.com').for(:password) }
+    it { should_not allow_value('short').for(:password) }
+    it { should_not allow_value('has spaces').for(:email) }
+    it { should_not allow_value('incomplete').for(:email) }
+    it { should_not allow_value('@.com').for(:email) }
+    it { should_not allow_value('@example.com').for(:email) }
+    it { should_not allow_value('a' * 100 + '@example.com').for(:email) }
     it { should have_many(:spaces) }
-    
+    it { should have_many(:subscriptions) }
+
     it 'validates uniqueness of email' do
       user1 = create(:user, email: 'myemail@example.com' )
       user2 = build(:user, email: 'myemail@example.com' )

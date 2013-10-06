@@ -17,3 +17,9 @@ May need to get qt working.
 Ubuntu: sudo apt-get install libqt4-dev
 Reference: 
 https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+
+
+Stripe
+---------------------
+Setup API keys
+Setup subscription plans

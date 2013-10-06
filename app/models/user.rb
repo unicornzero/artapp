@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :spaces
   has_secure_password
-  has_one :subscription
+  has_many :subscriptions
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
