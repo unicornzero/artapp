@@ -57,6 +57,8 @@ describe Permission do
       let(:user) { create(:user) }
       let(:owned_space) { create(:space, user_id: user.id) }
       let(:other_space) { create(:space) }
+      let(:owned_subscription) { Subscription.new(space_id: owned_space.id,
+                                user_id: user.id) }
       subject { Permission.new(user)}
       it { should permit("users", "index") }
       it { should permit("users", "show") }
@@ -76,8 +78,8 @@ describe Permission do
       it { should_not permit("photos", "update", other_space) }
       it { should_not permit("photos", "destroy", other_space) }
 
-      it { should permit("subscriptions", "edit", owned_space) }
-      it { should permit("subscriptions", "update", owned_space) }
+      it { should permit("subscriptions", "edit", owned_subscription) }
+      it { should permit("subscriptions", "update", owned_subscription) }
     end
   end  
 end
