@@ -15,7 +15,7 @@ class Permission
         space.user_id == user.id
       end
       allow :subscriptions, [:edit, :update] do |subscription|
-        Subscription.find(subscription.space_id).user_id == user.id
+        Space.find(subscription.space_id).user_id == user.id
       end
     end
   end
