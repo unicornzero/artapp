@@ -9,7 +9,6 @@ describe Subscription do
       expect(subscription).to be_valid
     end
 
-    xit { should validate_presence_of(:user_id) }
     it { should validate_presence_of(:space_id) }
     it { should belong_to(:user) }
     it { should belong_to(:space) }
