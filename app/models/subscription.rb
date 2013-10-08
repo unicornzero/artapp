@@ -7,17 +7,11 @@ class Subscription < ActiveRecord::Base
   attr_accessor :stripe_token
 
   def subscribe_pro(stripetoken, current_user)
-    Stripe.api_key = CONFIG[:stripe_test_secret_key]
-    @customer = Stripe::Customer.create(
-      :card => stripetoken,
-      :plan => "01_basic",
-      :email => current_user.email
-      #add a description
-    )
+    stripe.subscribe_pro(stripetoken, current_user)
   end
 
   def stripe_id
-  	@customer.id
+    stripe.stripe_id
   end
 
   def downgrade
@@ -29,24 +23,18 @@ class Subscription < ActiveRecord::Base
   end
 
   def stripe_cancel_pro
-    begin 
-      Stripe.api_key = CONFIG[:stripe_test_secret_key]
-      #account = Stripe::Customer.retrieve(stripe_cust_id)
-      #@last_charged = Time.at(account["subscription"]["current_period_start"])
-      #account.cancel_subscription if account.subscription.status == 'active'
-      Stripe::Customer.retrieve(stripe_cust_id).cancel_subscription
-    rescue
-      'Cancellation unsuccessful'
-    end
+    stripe.cancel_subscription
   end
 
   def stripe_last_charged
     begin 
-      Stripe.api_key = CONFIG[:stripe_test_secret_key]
-      account = Stripe::Customer.retrieve(stripe_cust_id)["subscription"]["current_period_start"]
-      Time.at(account)
+      stripe.last_charged
     rescue
       'No record available'
     end
+  end
+
+  def stripe
+    @stripe ||= StripeService.new(self)
   end
 end
