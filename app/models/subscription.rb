@@ -12,6 +12,7 @@ class Subscription < ActiveRecord::Base
       :card => stripetoken,
       :plan => "01_basic",
       :email => current_user.email
+      #add a description
     )
   end
 
@@ -19,23 +20,33 @@ class Subscription < ActiveRecord::Base
   	@customer.id
   end
 
-  private
-  def stripe_last_charged
-    Stripe.api_key = CONFIG[:stripe_test_secret_key]
-    charges = Stripe::Charge.all(:customer => stripe_cust_id)
-    c.delinquent
-    c.subscription.current_period_start
+  def downgrade
+    if self.plan == 'Pro'
+      stripe_cancel_pro
+      self.plan = 'Downgrading to Basic'
+      self.save
+    end
   end
 
   def stripe_cancel_pro
-    Stripe.api_key = CONFIG[:stripe_test_secret_key]
-    account = Stripe::Customer.retrieve(stripe_cust_id)
-    account.cancel_subscription
+    begin 
+      Stripe.api_key = CONFIG[:stripe_test_secret_key]
+      #account = Stripe::Customer.retrieve(stripe_cust_id)
+      #@last_charged = Time.at(account["subscription"]["current_period_start"])
+      #account.cancel_subscription if account.subscription.status == 'active'
+      Stripe::Customer.retrieve(stripe_cust_id).cancel_subscription
+    rescue
+      'Cancellation unsuccessful'
+    end
   end
 
-  def current_status
-    Stripe.api_key = CONFIG[:stripe_test_secret_key]
-    charges = Stripe::Charge.all(:customer => stripe_cust_id)
-    c.subscription.status
+  def stripe_last_charged
+    begin 
+      Stripe.api_key = CONFIG[:stripe_test_secret_key]
+      account = Stripe::Customer.retrieve(stripe_cust_id)["subscription"]["current_period_start"]
+      Time.at(account)
+    rescue
+      'No record available'
+    end
   end
 end

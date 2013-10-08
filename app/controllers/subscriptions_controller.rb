@@ -37,6 +37,14 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def destroy
+    @subscription = Subscription.find(params[:id])
+    @space = Space.find(@subscription.space_id)
+    @subscription.downgrade
+    flash[:message] = 'Your subscription has been cancelled.'
+    redirect_to edit_space_subscription_path(@space, @subscription)
+  end
+
 private
   def current_resource
     if params[:id]

@@ -3,10 +3,9 @@
 <h3><%= @space.name %></h3>
 <p>
 Current Plan: <%= @subscription.plan %><br>
+Last Paid: <%= @subscription.stripe_last_charged %><br>
 <% if @subscription.plan == 'Basic' %>
-
   <%= form_for [@space, @subscription] do |f| %>
-
     <% if @subscription.errors.any? %>
       <ul>
       <% @subscription.errors.full_messages.each do |msg| %>
@@ -14,7 +13,6 @@ Current Plan: <%= @subscription.plan %><br>
       <% end %>
       </ul>
     <% end %>
-
     <p>Upgrade to Pro:
     <script
       src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
@@ -23,11 +21,30 @@ Current Plan: <%= @subscription.plan %><br>
       data-name="Space Subscription"
       data-description="Monthly Subscription">
     </script></p>
-
     <%= f.hidden_field :user_id %>
   <% end %>
   <br><br>
 <% elsif @subscription.plan == 'Pro' %>
-Montly payments began: <%= @subscription.created_at %>
+  Montly payments began: <%= @subscription.created_at %><br>
+  <%= link_to 'Cancel Pro Subscription', space_subscription_path(@space, @subscription), method: :delete, data: { confirm: 'If you cancel your Pro subscription, your listing will revert to a Basic listing at the end of the billing period. If you are sure you want to cancel, click OK to proceed.'} %>
+<% elsif @subscription.plan == 'Downgrading to Basic' %>
+  <%= form_for [@space, @subscription] do |f| %>
+    <% if @subscription.errors.any? %>
+      <ul>
+      <% @subscription.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    <p>Restart Pro Subscription:
+    <script
+      src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+      data-key="<%= CONFIG[:stripe_test_public_key] %>"
+      data-amount="1499"
+      data-name="Space Subscription"
+      data-description="Monthly Subscription">
+    </script></p>
+    <%= f.hidden_field :user_id %>
+  <% end %>
 <% end %>
 </p>

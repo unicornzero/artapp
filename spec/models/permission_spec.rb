@@ -80,6 +80,7 @@ describe Permission do
 
       it { should permit("subscriptions", "edit", owned_subscription) }
       it { should permit("subscriptions", "update", owned_subscription) }
+      it { should permit("subscriptions", "destroy", owned_subscription) }
     end
   end  
 end

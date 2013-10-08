@@ -24,14 +24,28 @@ describe Subscription do
 
     xit 'should have fields for subscription status' do
       user = create(:user)
-      space = create(:space, user_id: user_id)
-      subscripion = Subscription.new(user_id: user.id, space_id: space.id)
+      space = create(:space, user_id: user.id)
+      subscription = Subscription.new(user_id: user.id, space_id: space.id)
       subscription.last_paid = Time.now
       subscription.plan = 'Pro'
       subscription.rate = 10
       subscription.status = 'Active'
 
       expect(subscription).to be_valid
+    end
+  end
+
+  describe '#downgrade' do
+    it 'stops pro subscription' do
+      user = create(:user)
+      space = create(:space, user_id: user.id)
+      subscription = Subscription.create(user_id: user.id, space_id: space.id,
+        plan: 'Pro')
+      subscription.stub(:stripe_cancel_pro) { true }
+
+      subscription.downgrade
+
+      expect(subscription.plan).to eq('Downgrading to Basic')
     end
   end
 
