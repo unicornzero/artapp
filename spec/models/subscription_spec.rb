@@ -41,7 +41,7 @@ describe Subscription do
       space = create(:space, user_id: user.id)
       subscription = Subscription.create(user_id: user.id, space_id: space.id,
         plan: 'Pro')
-      subscription.stub(:stripe_cancel_pro) { true }
+      subscription.stub_chain(:stripe, :cancel_subscription)
 
       subscription.downgrade
 
