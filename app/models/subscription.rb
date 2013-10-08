@@ -16,14 +16,10 @@ class Subscription < ActiveRecord::Base
 
   def downgrade
     if self.plan == 'Pro'
-      stripe_cancel_pro
+      stripe.cancel_subscription
       self.plan = 'Downgrading to Basic'
       self.save
     end
-  end
-
-  def stripe_cancel_pro
-    stripe.cancel_subscription
   end
 
   def stripe_last_charged
