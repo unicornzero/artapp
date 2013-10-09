@@ -11,7 +11,7 @@ class StripeService
 
   def last_charged
     account = Stripe::Customer.retrieve(@subscription.stripe_cust_id)["subscription"]["current_period_start"]
-    Time.at(account)
+    Time.at(account).strftime("%B %-d, %Y")
   end
 
   def subscribe_pro(stripetoken, current_user)

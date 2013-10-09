@@ -4,6 +4,7 @@ class SubscriptionsController < ApplicationController
   def edit
     @subscription = current_resource
     @space = Space.find(params[:space_id])
+    @last_charged = @subscription.stripe_last_charged
   end
 
   def update
