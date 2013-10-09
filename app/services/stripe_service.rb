@@ -10,8 +10,18 @@ class StripeService
   end
 
   def last_charged
-    account = Stripe::Customer.retrieve(@subscription.stripe_cust_id)["subscription"]["current_period_start"]
-    Time.at(account).strftime("%B %-d, %Y")
+  begin
+    account = Stripe::Customer.retrieve(@subscription.stripe_cust_id).to_hash
+    if account["subscription"]
+      Time.at(account["subscription"]["current_period_start"]).strftime("%B %-d, %Y")
+    else
+      'No payment history available'
+    end
+  rescue Stripe::StripeError => e
+    logger.error "StripeService Error: " + e.message
+    errors.add :base, "StripeService cannot find last_charged: #{e.message}."
+    false
+  end
   end
 
   def subscribe_pro(stripetoken, current_user)
@@ -24,6 +34,6 @@ class StripeService
   end
 
   def stripe_id
-    @customer.id
+    @customer.id || nil
   end
 end
