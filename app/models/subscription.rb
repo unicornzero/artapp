@@ -12,9 +12,8 @@ class Subscription < ActiveRecord::Base
       false
   end
 
-  def subscribe_and_get_id(stripetoken, current_user)
-    self.stripe_cust_id = stripe.subscribe_pro_with_id(stripetoken, current_user)
-    save
+  def subscribe_and_get_id(current_user)
+    self.update_attribute(:stripe_cust_id, stripe.subscribe_pro(current_user))
     rescue Stripe::StripeError => e
       logger.error "Stripe Error: " + e.message
       errors.add :base, "Unable to create your subscription: #{e.message}."
@@ -24,8 +23,7 @@ class Subscription < ActiveRecord::Base
   def downgrade
     if self.plan == 'Pro'
       stripe.cancel_subscription
-      self.plan = 'Downgrading to Basic'
-      self.save
+      self.update_attribute(:plan, 'Downgrading to Basic')
     end  
     rescue Stripe::StripeError => e
       logger.error "Stripe Error: " + e.message

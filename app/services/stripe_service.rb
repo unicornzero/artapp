@@ -28,9 +28,9 @@ class StripeService
     end
   end
 
-  def subscribe_pro_with_id(stripetoken, current_user)
+  def subscribe_pro(current_user)
     @customer = Stripe::Customer.create(
-      :card => stripetoken,
+      :card => @subscription.stripe_token,
       :plan => "01_basic",
       :email => current_user.email,
       :description => "Subscription ##{@subscription.id}"

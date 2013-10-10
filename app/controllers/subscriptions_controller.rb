@@ -11,11 +11,11 @@ class SubscriptionsController < ApplicationController
     flash[:deets] = params
     if params[:stripeToken]
       @subscription = Subscription.find(params[:id])
-      @subscription.subscribe_and_get_id(params[:stripeToken], current_user)
+      @subscription.update_attributes(stripe_token: params[:stripeToken])
+      @subscription.subscribe_and_get_id(current_user)
       if @subscription.stripe_cust_id
-        @subscription.space_id = params[:space_id]
-        @subscription.user_id = current_user.id
-        @subscription.plan = 'Pro'
+        @subscription.attributes = { space_id: params[:space_id], 
+          user_id: current_user.id, plan: 'Pro' }
         if @subscription.save
           flash[:success] = 'Your account has been upgraded to Pro!'
           redirect_to '/account'
