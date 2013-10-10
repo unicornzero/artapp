@@ -4,8 +4,6 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
   validates :space_id, presence: true
 
-  attr_accessor :stripe_token
-
   def stripe_id
     stripe.stripe_id
     rescue Stripe::StripeError => e
@@ -36,7 +34,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def stripe_last_charged
-    charge = stripe.last_charged if self.stripe_customer_token
+    charge = stripe.last_charged if self.stripe_cust_id
     rescue Stripe::StripeError => e
       logger.error "Stripe Error: " + e.message
       errors.add :base, "Unable to find last charged date: #{e.message}."

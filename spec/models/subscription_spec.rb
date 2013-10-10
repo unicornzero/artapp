@@ -20,7 +20,7 @@ describe Subscription do
     xit { should allow_value(Time.now).for(:last_paid) }
     xit { should allow_value('active').for(:status) }
     xit { should allow_value('inactive').for(:status) }
-    it { should allow_value('something').for(:stripe_customer_token) }
+    it { should allow_value('something').for(:stripe_token) }
 
     xit 'should have fields for subscription status' do
       user = create(:user)
