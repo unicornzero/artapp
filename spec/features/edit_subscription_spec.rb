@@ -24,7 +24,7 @@ feature 'Subscription' do
     expect(page).to have_content 'Current Plan: Basic'
   end
 
-  scenario 'page owner can upgrade subscription', js: true do
+  scenario 'page owner can upgrade subscription', js: true, vcr: true do
     user = create(:user)
     space = create(:space, user_id: user.id, plan: 'Basic')
     visit root_path
@@ -48,7 +48,7 @@ feature 'Subscription' do
     expect(page).to have_content 'Current Plan: Pro'
   end
 
-  scenario 'page owner can downgrade subscription', js: true do
+  scenario 'page owner can downgrade subscription', js: true, vcr: true do
     user = create(:user)
     space = create(:space, user_id: user.id, plan: 'Basic')
     visit root_path

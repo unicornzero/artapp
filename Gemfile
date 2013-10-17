@@ -15,6 +15,8 @@ group :test do
   gem "launchy", "~> 2.3.0"
   gem "faker", "~> 1.1.2"
   gem "shoulda-matchers", "~> 2.4.0"
+  gem "vcr", "~> 2.6.0"
+  gem "webmock", "~> 1.14.0"
 end
 
 # Use sqlite3 as the database for Active Record

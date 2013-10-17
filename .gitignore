@@ -21,3 +21,6 @@
 
 # Ignore local configuration file
 /config/application.yml
+
+# Ignore vcr test casettes
+/spec/cassettes/*
