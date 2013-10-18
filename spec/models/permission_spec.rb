@@ -14,8 +14,9 @@ end
 describe Permission do
   describe '#allow?' do
     context 'guest' do
-      subject { Permission.new(nil) }
       let(:space) { create(:space) }
+      subject { Permission.new(nil) }
+
       it { should permit("users", "index") }
       it { should permit("spaces", "index") }
       it { should permit("spaces", "show") }
@@ -27,8 +28,9 @@ describe Permission do
     end
 
     context 'user' do
-      subject { Permission.new(build(:user)) }
       let(:space) { create(:space) }
+      subject { Permission.new(build(:user)) }
+
       it { should permit("users", "index") }
       it { should permit("spaces", "index") }
       it { should permit("photos", "show") }
@@ -39,8 +41,9 @@ describe Permission do
     end
 
     context 'superadmin' do
-      subject { Permission.new(build(:user, superadmin: true)) }
       let(:space) { create(:space) }
+      subject { Permission.new(build(:user, superadmin: true)) }
+
       it { should permit("users", "index") }
       it { should permit("users", "show") }
       it { should permit("spaces", "index") }
@@ -54,12 +57,12 @@ describe Permission do
     end
 
     context 'space-owner' do
-      let(:user) { create(:user) }
-      let(:owned_space) { create(:space, user_id: user.id) }
+      let(:owned_subscription) { create(:owned_subscription) }
+      let(:owned_space) { owned_subscription.space }
       let(:other_space) { create(:space) }
-      let(:owned_subscription) { Subscription.new(space_id: owned_space.id,
-                                user_id: user.id) }
+      let(:user) { owned_subscription.user }
       subject { Permission.new(user)}
+
       it { should permit("users", "index") }
       it { should permit("users", "show") }
       it { should permit("spaces", "index") }

@@ -9,6 +9,11 @@ describe Subscription do
       expect(subscription).to be_valid
     end
 
+    it 'should work with owned_subscription factory' do
+      subscription = build(:owned_subscription)
+      expect(subscription).to be_valid
+    end
+
     it { should validate_presence_of(:space_id) }
     it { should belong_to(:user) }
     it { should belong_to(:space) }
@@ -37,10 +42,10 @@ describe Subscription do
 
   describe '#downgrade' do
     it 'stops pro subscription' do
-      user = create(:user)
-      space = create(:space, user_id: user.id)
-      subscription = Subscription.create(user_id: user.id, space_id: space.id,
-        plan: 'Pro')
+      #user = create(:user)
+      #space = create(:space, user_id: user.id)
+      #subscription = Subscription.create(user_id: user.id, space_id: space.id, plan: 'Pro')
+      subscription = create(:pro_subscription)
       subscription.stub_chain(:stripe, :cancel_subscription)
 
       subscription.downgrade
