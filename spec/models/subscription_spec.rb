@@ -54,6 +54,16 @@ describe Subscription do
     end
   end
 
+  describe '#payment_error' do
+    it 'sets active to "Payment Error"' do
+      subscription = create(:pro_subscription)
+
+      subscription.payment_error
+
+      expect(subscription.plan).to eq('Payment Error')
+    end
+  end
+
   describe '#since_last_paid' do
     xit 'should calculate days since last payment' do
       user = create(:user)

@@ -31,6 +31,13 @@ class Subscription < ActiveRecord::Base
       false
   end
 
+  def payment_error
+    self.update_attribute(:plan, 'Payment Error')
+    save
+    puts self.plan
+    puts 'from model'
+  end
+
   def stripe_last_charged
     charge = stripe.last_charged if self.stripe_cust_id
     rescue Stripe::StripeError => e

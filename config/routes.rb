@@ -7,6 +7,8 @@ Artapp::Application.routes.draw do
   delete 'logout', to: 'sessions#destroy', as: 'logout'
   get 'signup', to: 'users#new', as: 'signup'
   get 'account', to: 'users#show', as: 'account'
+  post 'stripe-endpoint', to: 'stripe_webhooks#endpoint'
+  get 'stripe-endpoint', to: 'stripe_webhooks#endpoint'
 
   resources :password_resets
   resources :sessions
