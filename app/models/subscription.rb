@@ -34,8 +34,7 @@ class Subscription < ActiveRecord::Base
   def payment_error
     self.update_attribute(:plan, 'Payment Error')
     save
-    puts self.plan
-    puts 'from model'
+    puts "the plan listed in the model is #{self.plan}"
   end
 
   def stripe_last_charged
