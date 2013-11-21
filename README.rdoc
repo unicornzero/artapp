@@ -1,8 +1,9 @@
-# artapp Project
+# artapp Project #
 ## Project Summary
 I’m practicing TDD while working on building a tool to facilitate connections between art galleries, patrons, and artists. It has a long way to go before it aligns with my vision for the project, but I’m enjoying carefully working through one piece of it at a time and refactoring as I find opportunities to do so.
 
 ## Project Highlights
+------------------
 * user authentication and sessions- built without the use of a third-party gem
 * custom authorization- multiple roles and a flexible rule structure
 * password reset- reset token is sent via email to allow user to change password
@@ -22,8 +23,8 @@ I’m practicing TDD while working on building a tool to facilitate connections 
  Users can request ownership/edit rights of a gallery space, artists can create spaces, users can request updates to unowned spaces, spaces can integrate their social media presence, site showcases featured galleries/artists/events, galleries can feature artists, users can browse or search spaces, spaces can create events, users can bookmark spaces and events, users can generate and share art walks, admin can add community events, and much more.
 
 
-## Setup info:
-
+Setup info:
+-----------
 
 ### Environment
 * cp config/application.example.yml config/application.yml
