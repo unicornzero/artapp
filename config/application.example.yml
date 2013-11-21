@@ -8,7 +8,8 @@
 #   designed.
 ################################################
 
-testy: "this is my test string"
-
 gmail_username: 'you@gmail.com'
 gmail_password: 'your_password'
+stripe_test_secret_key: 'sk_test_1234567890'
+stripe_test_public_key: 'pk_test_1234567890'
+sapass: 'your_string_here'
