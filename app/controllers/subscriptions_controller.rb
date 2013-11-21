@@ -20,18 +20,12 @@ class SubscriptionsController < ApplicationController
           flash[:success] = 'Your account has been upgraded to Pro!'
           redirect_to '/account'
         else
-          flash.now[:oops] = 'Upgrade nooooo successful'
-          flash[:error] = '1Upgrade not successful'
           redirect_to root_path
         end
       else
-        flash.now[:oops] = 'Upgrade nooooo successful'
-        flash[:error] = '2Upgrade not successful'
         redirect_to root_path 
       end
     else
-      flash.now[:oops] = 'Upgrade nooooo successful'
-      flash[:error] = '3Upgrade not successful'
       redirect_to root_path
     end
   end
