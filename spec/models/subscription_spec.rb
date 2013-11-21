@@ -21,30 +21,12 @@ describe Subscription do
     it { should allow_value(1).for(:space_id) }
     it { should allow_value('Pro').for(:plan) }
     it { should allow_value('Artist').for(:plan) }
-    xit { should allow_value(10).for(:rate) }
     xit { should allow_value(Time.now).for(:last_paid) }
-    xit { should allow_value('active').for(:status) }
-    xit { should allow_value('inactive').for(:status) }
     it { should allow_value('something').for(:stripe_token) }
-
-    xit 'should have fields for subscription status' do
-      user = create(:user)
-      space = create(:space, user_id: user.id)
-      subscription = Subscription.new(user_id: user.id, space_id: space.id)
-      subscription.last_paid = Time.now
-      subscription.plan = 'Pro'
-      subscription.rate = 10
-      subscription.status = 'Active'
-
-      expect(subscription).to be_valid
-    end
   end
 
   describe '#downgrade' do
     it 'stops pro subscription' do
-      #user = create(:user)
-      #space = create(:space, user_id: user.id)
-      #subscription = Subscription.create(user_id: user.id, space_id: space.id, plan: 'Pro')
       subscription = create(:pro_subscription)
       subscription.stub_chain(:stripe, :cancel_subscription)
 
