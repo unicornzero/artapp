@@ -8,11 +8,8 @@ describe Space do
   it { should have_many(:photos) }
   it { should belong_to(:user) }
   it { should have_one(:subscription) }
-  xit { should allow_value('active').for(:status) }
-  xit { should allow_value('inactive').for(:status) }
-  xit { should allow_value('basic').for(:version) }
-  xit { should allow_value('pro').for(:version) }
-  xit { should allow_value('artist').for(:version) }
+  it { should allow_value('venue').for(:plan) }
+  it { should allow_value('artist').for(:plan) }
   xit { should allow_value(true).for(:published_upgrade) }
   xit { should allow_value(false).for(:published_upgrade) }
 
