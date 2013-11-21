@@ -4,19 +4,19 @@
 I’m practicing TDD while working on building a tool to facilitate connections between art galleries, patrons, and artists. It has a long way to go before it aligns with my vision for the project, but I’m enjoying carefully working through one piece of it at a time and refactoring as I find opportunities to do so.
 
 ### Project Highlights
-* user authentication and sessions- built without the use of a third-party gem
-* custom authorization- multiple roles and a flexible rule structure
-* password reset- reset token is sent via email to allow user to change password
-* resque- sends password reset emails 
-* spaces- pages for featuring artists and galleries on the site
-* import spaces- super-admin can add spaces via csv import
-* user account page- access to edit owned spaces
-* space profile management- space owners can edit information
-* image uploading and resizing- images uploaded to spaces are saved in multiple sizes
-* subscriptions and Stripe- gallery owners can upgrade to a pro subscription and pay through Stripe
-* Stripe webhooks- a failed charge changes the subscription to 'payment error'
+* user authentication and sessions: built without the use of a third-party gem
+* custom authorization: multiple roles and a flexible rule structure
+* password reset: reset token is sent via email to allow user to change password
+* Resque: sends password reset emails 
+* spaces: pages for featuring artists and galleries on the site
+* import spaces: super-admin can add spaces via csv import
+* user account page: access to edit owned spaces
+* space profile management: space owners can edit information
+* image uploading and resizing: images uploaded to spaces are saved in multiple sizes
+* subscriptions and Stripe: gallery owners can upgrade to a pro subscription and pay through Stripe
+* Stripe webhooks: a failed charge changes the subscription to 'payment error'
 
-#### Future enhancements:
+#### Planned enhancements:
 Enhanced subscription management, additional functionlity for pro subscribers, responsive front-end navigation and design, adjust display based on user's edit/view permissions, handle additional Stripe webhook events, improve testing performance, store uploaded images on S3, move secret token to environment variables file, and much more.
 
 #### Additional features planned:
