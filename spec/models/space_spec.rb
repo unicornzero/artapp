@@ -10,8 +10,6 @@ describe Space do
   it { should have_one(:subscription) }
   it { should allow_value('venue').for(:plan) }
   it { should allow_value('artist').for(:plan) }
-  xit { should allow_value(true).for(:published_upgrade) }
-  xit { should allow_value(false).for(:published_upgrade) }
 
   it 'should be valid with valid information' do
     space = build(:space)
