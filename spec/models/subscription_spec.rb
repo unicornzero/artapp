@@ -21,7 +21,6 @@ describe Subscription do
     it { should allow_value(1).for(:space_id) }
     it { should allow_value('Pro').for(:plan) }
     it { should allow_value('Artist').for(:plan) }
-    xit { should allow_value(Time.now).for(:last_paid) }
     it { should allow_value('something').for(:stripe_token) }
   end
 
@@ -43,21 +42,6 @@ describe Subscription do
       subscription.payment_error
 
       expect(subscription.plan).to eq('Payment Error')
-    end
-  end
-
-  describe '#since_last_paid' do
-    xit 'should calculate days since last payment' do
-      user = create(:user)
-      space = create(:space)
-      thirty_five_days = 60 * 60 * 24 * 35
-      subscription = Subscription.new(
-        user_id: user.id, 
-        space_id: space.id,
-        last_paid: Time.now - thirty_five_days
-        ).save
-
-      expect(subscription.since_last_paid).to be_within(1).of(35)
     end
   end
 end
