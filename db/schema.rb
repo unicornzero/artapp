@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010163237) do
+ActiveRecord::Schema.define(version: 20131122225138) do
 
   create_table "photos", force: true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131010163237) do
     t.string   "url"
     t.integer  "user_id"
     t.string   "plan"
+    t.text     "description"
   end
 
   create_table "subscriptions", force: true do |t|

@@ -11,6 +11,7 @@ describe Space do
   it { should allow_value('venue').for(:plan) }
   it { should allow_value('artist').for(:plan) }
   it { should allow_value('www.myurl.com').for(:url) }
+  it { should allow_value('description text').for(:description) }
 
   it 'should be valid with valid information' do
     space = build(:space)
