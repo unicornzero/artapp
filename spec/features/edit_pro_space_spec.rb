@@ -11,10 +11,11 @@ feature 'edit Pro Space fields' do
     fill_in 'Password', with: user.password
     click_button 'Log In'
     visit '/account'
-    click_link 'Edit Space'
+    click_link 'Edit Page'
 
     fill_in 'Description', with: 'This gallery is fabulously wonderful, with an extensive collection of really great art.'
     click_button 'Save'
+    save_and_open_page
 
     expect(page).to have_content 'fabulously wonderful'
     expect(page).to have_content 'Your changes have been saved.'

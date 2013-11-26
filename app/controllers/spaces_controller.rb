@@ -32,7 +32,7 @@ class SpacesController < ApplicationController
 
   def update
     @space = Space.find(params[:id])
-    if @space.update_attributes(params.require(:space).permit(:name))
+    if @space.update_attributes(params.require(:space).permit(:name, :description))
       flash[:success] = 'Your changes have been saved.'
     else
       flash.now[:error] = 'Error- Your changes have not been saved'
