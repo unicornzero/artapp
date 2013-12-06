@@ -40,7 +40,4 @@ class User < ActiveRecord::Base
     update_column(:superadmin, setting) if passphrase == CONFIG[:sapass]
   end
 
-  def super_admin?
-    superadmin
-  end
 end
