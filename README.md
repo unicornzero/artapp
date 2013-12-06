@@ -17,7 +17,7 @@ I’m practicing TDD while working on building a tool to facilitate connections 
 * Stripe webhooks: a failed charge changes the subscription to 'payment error'
 
 #### Planned enhancements:
-Enhanced subscription management, additional functionlity for pro subscribers, responsive front-end navigation and design, adjust display based on user's edit/view permissions, handle additional Stripe webhook events, improve testing performance, store uploaded images on S3, move secret token to environment variables file, and much more.
+Enhanced subscription management, test removing json parse from webhook controller (verify how Rails handles the incoming request data), additional functionlity for pro subscribers, responsive front-end navigation and design, adjust display based on user's edit/view permissions, handle additional Stripe webhook events, enhance security of user session storage, improve testing performance, store uploaded images on S3, move secret token to environment variables file, and much more.
 
 #### Additional features planned:
 Users can request ownership/edit rights of a gallery space, artists can create spaces, users can request updates to unowned spaces, spaces can integrate their social media presence, site showcases featured galleries/artists/events, galleries can feature artists, users can browse or search spaces, spaces can create events, users can bookmark spaces and events, users can generate and share art walks, admin can add community events, and much more.
