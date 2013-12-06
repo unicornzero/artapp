@@ -18,6 +18,19 @@ describe Space do
     expect(space).to be_valid
   end
 
+  describe 'setting a twitter handle' do
+    xit 'saves the twitter handle'
+
+    context 'when user has supplied their own "@" symbol' do
+      it 'removes the "@" symbol before saving the record' do
+        space = create(:space)
+        space.twitter = '@ryleekeys'
+
+        expect(space.twitter).to eq('ryleekeys')
+      end
+    end
+  end
+
   context '#set_owner' do
     it 'associates to a user' do
       user = create(:user)
