@@ -4,7 +4,6 @@ require 'json'
 skip_before_filter :verify_authenticity_token
 
   def endpoint
-    puts ' '
     respond_to do |format|
       format.json do
         request.body.rewind                   #https://github.com/rails/rails/pull/11353
@@ -22,9 +21,7 @@ skip_before_filter :verify_authenticity_token
         @sub = Subscription.find_by(stripe_cust_id: customer)
         if @sub
           @sub.payment_error
-          puts "subscription id #{@sub.id} found"          
         else
-          puts "subscription not found"
         end
       end
     end
