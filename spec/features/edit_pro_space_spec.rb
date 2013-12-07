@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'edit Pro Space fields' do 
 
-  scenario 'page owner can edit description field', js: true, focus: true do
+  scenario 'page owner can edit description field', js: true do
     user = create(:user)
     space = create(:space, user_id: user.id, plan: 'Pro')
     visit root_path
