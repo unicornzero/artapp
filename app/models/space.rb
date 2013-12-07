@@ -15,4 +15,5 @@ class Space < ActiveRecord::Base
   def setup_subscription
     create_subscription(user_id: user_id, plan: 'Basic').save
   end
+
 end

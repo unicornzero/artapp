@@ -1,25 +1,20 @@
 <h1><%= @space.name %></h1>
   
 <br>
+<p>
+  Twitter handle: <%= @space.twitter_handle %>
+</p>
 
 <p>
   <%= @space.description %>
 </p>
 
 <div id='space_details'>
-  <% if @space.url %>
-    Website: <%= link_to @space.url, @space.url %>
-  <% end %>
+  Website: <%= @space.link %>
 </div>
 
 <br>
 
-<% if @space.photos %>
-  <div id='space_photos'>
-    <% @space.photos.each do |photo| %>
-      <h4><%= photo.name %></h4>
-      <p>      <%= image_tag photo.image_url(:medium), id: photo.name %><br>
-</p>
-    <% end %>
-  </div>
-<% end %>
+<div id='space_photos'>
+  <%= render @space.photos %>
+</div>

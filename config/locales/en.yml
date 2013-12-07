@@ -21,3 +21,5 @@
 
 en:
   hello: "Hello world"
+  twitter:
+  	handle_not_yet_set: 'not yet set'
