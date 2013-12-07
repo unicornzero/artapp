@@ -80,7 +80,7 @@ describe User do
       user = create(:user)
       user.set_super_admin(true, passphrase)
 
-      expect(user).to be_super_admin
+      expect(user).to be_superadmin
     end
   end
 end
