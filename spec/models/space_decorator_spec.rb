@@ -34,4 +34,5 @@ describe SpaceDecorator do
 
   pending 'handles both @ and no @ twitter handles'
   pending 'handles presence and absence of http in url'
+  pending 'handle absence of values'
 end

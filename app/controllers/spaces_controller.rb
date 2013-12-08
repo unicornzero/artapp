@@ -33,7 +33,8 @@ class SpacesController < ApplicationController
 
   def update
     @space = Space.find(params[:id])
-    if @space.update_attributes(params.require(:space).permit(:name, :description, :twitter))
+    form = SpaceForm.new(@space)
+    if form.submit(space_params)
       flash[:success] = 'Your changes have been saved.'
     else
       flash.now[:error] = 'Error- Your changes have not been saved'
@@ -41,7 +42,11 @@ class SpacesController < ApplicationController
     redirect_to edit_space_path(@space)
   end
 
-private
+  private
+  def space_params
+    params.require(:space).permit(:name, :description, :twitter)
+  end
+
   def current_resource
     if params[:id]
       Space.find(params[:id])
