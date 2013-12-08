@@ -12,7 +12,7 @@ class SpaceDecorator
   end
 
   def twitter_handle
-    "@#{space.twitter}"
+    tweeter.format
   end
 
   def twitter_link
@@ -26,6 +26,14 @@ class SpaceDecorator
   end
 
   def twitter_url
-    "http://www.twitter.com/#{space.twitter}"
+    "http://www.twitter.com/#{twitter_name}"
+  end
+
+  def tweeter
+    TwitterHandle.new(space.twitter)
+  end
+
+  def twitter_name
+    tweeter.sanitize
   end
 end

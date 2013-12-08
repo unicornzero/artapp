@@ -5,6 +5,7 @@ class SpaceForm
   end
 
   def submit(params)
+    params[:twitter] = TwitterHandle.new(params[:twitter]).sanitize
     space.update_attributes(params)
   end
 
