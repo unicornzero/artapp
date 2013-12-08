@@ -2,18 +2,14 @@
   
 <br>
 <p>
-  Twitter handle: <%= @space.twitter %>
+  Website: <%= @space.website %>
+</p><p>
+  Twitter handle: <%= @space.twitter_link %>
 </p>
 
 <p>
   <%= @space.description %>
 </p>
-
-<div id='space_details'>
-  <% if @space.url %>
-    Website: <%= link_to @space.url, @space.url %>
-  <% end %>
-</div>
 
 <br>
 

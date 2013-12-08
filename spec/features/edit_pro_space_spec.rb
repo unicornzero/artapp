@@ -35,6 +35,8 @@ feature 'edit Pro Space fields' do
     click_button 'Save'
     visit space_path(space)
 
-    expect(page).to have_content 'Twitter handle: myhandle'
+    expect(page).to have_content 'Twitter handle: @myhandle'
   end
+
+  pending 'allowing the "@" symbol for the twitter handle'
 end

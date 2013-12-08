@@ -21,7 +21,8 @@ class SpacesController < ApplicationController
   end
 
   def show
-    @space = Space.find(params[:id])
+    space = Space.find(params[:id])
+    @space = SpaceDecorator.new(space)
   end
 
   def edit
