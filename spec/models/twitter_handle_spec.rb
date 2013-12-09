@@ -16,6 +16,13 @@ describe TwitterHandle do
 
       expect(result).to eq "@handle"
     end
+
+    it 'returns "not yet added" for ""' do
+      handle = ""
+      result = TwitterHandle.build(handle).format
+
+      expect(result).to eq "not yet added"
+    end
   end
 
   context '#sanitize' do
