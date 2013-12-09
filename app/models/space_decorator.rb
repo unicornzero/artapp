@@ -30,7 +30,7 @@ class SpaceDecorator
   end
 
   def tweeter
-    TwitterHandle.new(space.twitter)
+    TwitterHandle.build(space.twitter)
   end
 
   def twitter_name

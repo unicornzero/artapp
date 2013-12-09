@@ -1,6 +1,14 @@
 class TwitterHandle
 
-  def initialize(handle = 'twitter handle not yet added')
+  def self.build(handle)
+    if handle.present?
+      new(handle)
+    else
+      NullTwitterHandle.new
+    end
+  end
+
+  def initialize(handle)
     @handle = handle
   end
 

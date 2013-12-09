@@ -23,16 +23,23 @@ describe SpaceDecorator do
   end
 
   context '#twitter_link' do
-    it 'returns a twitter link' do
+    it 'returns a twitter link for handle "mytweets"' do
       space = create(:space)
       space.twitter = 'mytweets'
       result = SpaceDecorator.new(space).twitter_link
 
       expect(result).to eq "<a href=\"http://www.twitter.com/mytweets\">@mytweets</a>"     
     end
+
+    it 'returns a twitter link for handle "mytweets"' do
+      space = create(:space)
+      space.twitter = '@mytweets'
+      result = SpaceDecorator.new(space).twitter_link
+
+      expect(result).to eq "<a href=\"http://www.twitter.com/mytweets\">@mytweets</a>"     
+    end
   end
 
-  pending 'handles both @ and no @ twitter handles'
   pending 'handles presence and absence of http in url'
-  pending 'handle absence of values'
+  pending 'handles absence of values'
 end
