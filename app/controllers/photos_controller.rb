@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
   def create
     @space = Space.find(params[:space_id])
     @photo = @space.photos.build
-    @photo.update_attributes(params.require(:photo).permit(:space_id, :name, :image))
+    @photo.update_attributes(photo_params)
     if @photo.save
       flash[:success] = 'Your image has been uploaded'
       redirect_to edit_space_path(@photo.space)
@@ -29,7 +29,7 @@ class PhotosController < ApplicationController
 
   def update
     photo = Photo.find(params[:id])
-    photo.update_attributes(params.require(:photo).permit(:name))
+    photo.update_attributes(photo_params)
     if photo.valid?
       photo.save
       flash[:success] = 'Your image has been updated'
@@ -49,6 +49,10 @@ class PhotosController < ApplicationController
   end
 
 private
+  def photo_params
+    params.require(:photo).permit(:space_id, :name, :image)
+  end
+
   def current_resource
     if params[:space_id]
       Space.find(params[:space_id])
