@@ -1,6 +1,6 @@
 class TwitterHandle
 
-  def self.build(handle)
+  def self.build(handle = nil)
     if handle.present?
       new(handle)
     else
