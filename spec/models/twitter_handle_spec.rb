@@ -36,11 +36,12 @@ describe TwitterHandle do
       expect(result).to eq "@handle"
     end
 
-    it 'returns "not yet added" for ""' do
+    it "returns 'I18n.t('twitter.handle_not_yet_set') for ''" do
       handle = ""
       result = TwitterHandle.build(handle).format
+      null_twitter_string = I18n.t('twitter.handle_not_yet_set')
 
-      expect(result).to eq "not yet added"
+      expect(result).to eq null_twitter_string
     end
   end
 
