@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe SpaceDecorator do
-  
+  let(:space) { create(:space) }
+
   context '#website' do
     it 'returns a linked url' do
-      space = create(:space)
       space.url = 'http://www.myweburl.com'
       result = SpaceDecorator.new(space).website
 
@@ -14,7 +14,6 @@ describe SpaceDecorator do
 
   context '#twitter_handle' do
     it 'returns a twitter link' do
-      space = create(:space)
       space.twitter = 'mytweets'
       result = SpaceDecorator.new(space).twitter_handle
 
@@ -24,7 +23,6 @@ describe SpaceDecorator do
 
   context '#twitter_link' do
     it 'returns a twitter link for handle "mytweets"' do
-      space = create(:space)
       space.twitter = 'mytweets'
       result = SpaceDecorator.new(space).twitter_link
 
@@ -32,7 +30,6 @@ describe SpaceDecorator do
     end
 
     it 'returns a twitter link for handle "mytweets"' do
-      space = create(:space)
       space.twitter = '@mytweets'
       result = SpaceDecorator.new(space).twitter_link
 
