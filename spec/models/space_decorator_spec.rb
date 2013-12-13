@@ -3,15 +3,6 @@ require 'spec_helper'
 describe SpaceDecorator do
   let(:space) { create(:space) }
 
-  context '#website' do
-    it 'returns a linked url' do
-      space.url = 'http://www.myweburl.com'
-      result = SpaceDecorator.new(space).website
-
-      expect(result).to eq "<a href=\"http://www.myweburl.com\">http://www.myweburl.com</a>"
-    end
-  end
-
   context '#twitter_handle' do
     it 'returns a twitter link' do
       space.twitter = 'mytweets'
@@ -34,6 +25,22 @@ describe SpaceDecorator do
       result = SpaceDecorator.new(space).twitter_link
 
       expect(result).to eq "<a href=\"http://www.twitter.com/mytweets\">@mytweets</a>"     
+    end
+  end
+
+  context '#website' do
+    it 'returns a www website link for url "http://www.mywebsite.com"' do
+      space.url = 'http://www.mywebsite.com'
+      result = SpaceDecorator.new(space).website
+
+      expect(result).to eq "<a href=\"http://www.mywebsite.com\">www.mywebsite.com</a>"
+    end
+
+    it 'returns a www website link for url "www.mywebsite.com"' do
+      space.url = 'http://www.mywebsite.com'
+      result = SpaceDecorator.new(space).website
+
+      expect(result).to eq "<a href=\"http://www.mywebsite.com\">www.mywebsite.com</a>"
     end
   end
 
