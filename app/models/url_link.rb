@@ -13,27 +13,27 @@ class UrlLink
   end
 
   def pretty_url
-    wwwify
+    remove_http
   end
 
   def full_url
-    endify(url)
+    remove_trailing_slash(url)
   end
 
   private
 
   attr_reader :url, :tempurl
 
-  def wwwify
+  def remove_http
     if url.starts_with? "http://www."
       @tempurl = url[7..-1]
-      endify(@tempurl)
+      remove_trailing_slash(@tempurl)
     else
-      endify(url)
+      remove_trailing_slash(url)
     end
   end
 
-  def endify(tempurl)
+  def remove_trailing_slash(tempurl)
     if tempurl.ends_with? "/"
       tempurl[0..-2]
     else
