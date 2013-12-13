@@ -67,7 +67,7 @@ describe UrlLink do
 
   context '#full_url' do
     it 'returns "http://www.mywebsite.com" for "http://www.mywebsite.com/"' do
-      url = "http://www.mywebsite.com"
+      url = "http://www.mywebsite.com/"
       result = UrlLink.build(url).full_url
 
       expect(result).to eq "http://www.mywebsite.com"

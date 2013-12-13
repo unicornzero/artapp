@@ -17,7 +17,7 @@ class UrlLink
   end
 
   def full_url
-    url
+    endify(url)
   end
 
   private

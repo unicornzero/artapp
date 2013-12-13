@@ -44,6 +44,5 @@ describe SpaceDecorator do
     end
   end
 
-  pending 'handles presence and absence of http in url'
   pending 'handles absence of values'
 end
