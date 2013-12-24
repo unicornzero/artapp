@@ -25,6 +25,9 @@ feature 'Subscription' do
   end
 
   scenario 'page owner can upgrade subscription', js: true, vcr: true do
+#  scenario 'page owner can upgrade subscription', js: true do
+  #WebMock.allow_net_connect!
+  #VCR.turned_off do  
     user = create(:user)
     space = create(:space, user_id: user.id, plan: 'Basic')
     visit root_path
@@ -36,16 +39,21 @@ feature 'Subscription' do
     click_link 'Manage Subscription'
 
     click_button 'Pay with Card'
-    fill_in 'paymentNumber', with: '4242424242424242'
-    fill_in 'Expires', with: '01/15'
-    fill_in 'paymentName', with: 'R. B. Gumbo'
-    fill_in 'Card code', with: '123'
+    fill_in 'Card number', with: '4242424242424242'
+    fill_in 'cc-exp', with: '01/15'
+    fill_in 'Email', with: 'gumbo@example.com'
+    fill_in 'CVC', with: '123'
     click_button 'Pay'
 
+sleep 2
+save_and_open_page
     expect(page).to have_content 'Your account has been upgraded to Pro!'
+sleep 1
+save_and_open_page
     click_link 'Manage Subscription'
 
     expect(page).to have_content 'Current Plan: Pro'
+ # end
   end
 
   scenario 'page owner can downgrade subscription', js: true, vcr: true do
@@ -59,12 +67,15 @@ feature 'Subscription' do
     visit '/account'
     click_link 'Manage Subscription'
     click_button 'Pay with Card'
-    fill_in 'paymentNumber', with: '4242424242424242'
-    fill_in 'Expires', with: '01/15'
-    fill_in 'paymentName', with: 'R. B. Gumbo'
-    fill_in 'Card code', with: '123'
+    fill_in 'Card number', with: '4242424242424242'
+    fill_in 'cc-exp', with: '01/15'
+    fill_in 'Email', with: 'gumbo@example.com'
+    fill_in 'CVC', with: '123'
     click_button 'Pay'
+sleep 1
+
     click_link 'Manage Subscription'
+sleep 2
 
     click_link 'Cancel Pro Subscription'
     page.driver.accept_js_prompts!
